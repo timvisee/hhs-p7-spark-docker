@@ -36,7 +36,7 @@ echo
 echo "Notebook is running at:"
 echo "$NOTEBOOK_URL"
 echo
-echo "Use ./stop to stop the container
+echo "Use ./stop to stop the container"
 
 echo "Done"
 
