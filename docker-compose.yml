@@ -5,6 +5,8 @@ spark:
         - '8888:8888'
     stdin_open: true
     tty: true
+    environment:
+        - GRAND_SUDO=yes
     volumes:
         - './work:/home/jovyan/work'
 
