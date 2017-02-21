@@ -1,11 +1,23 @@
 #!/bin/bash
 
+# Get the current path
+MY_PATH="`dirname \"$0\"`"
+
 # Script constants
 PROJECT_NAME="spark"
+PROJECT_WORK_DIR="$MY_PATH/work"
+
+# Install everything if the work directory doesn't exist
+if [ ! -d "$PROJECT_WORK_DIR" ]; then
+    echo "Starting installation script..."
+    ./src/install
+else
+    echo "The work directory exists."
+fi
 
 # Start the docker container and detach
 echo "Starting Spark container using Docker..."
-sudo docker-compose -p "$PROJECT_NAME" up -d
+sudo docker-compose -f "$MY_PATH/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # It takes a while for notebook to start, wait for this
 echo "Waiting 2 seconds for Jupyter notebook to start..."
