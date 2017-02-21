@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Script constants
+PROJECT_NAME="spark"
+
 # Start the docker container and detach
 echo "Stopping running Spark container in Docker..."
-sudo docker-compose stop
+sudo docker-compose -p "$PROJECT_NAME" stop
 echo "Done"
 

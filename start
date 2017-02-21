@@ -1,6 +1,29 @@
 #!/bin/bash
 
+# Script constants
+PROJECT_NAME="spark"
+
 # Start the docker container and detach
 echo "Starting Spark container using Docker..."
-sudo docker-compose up -d
+sudo docker-compose -p "$PROJECT_NAME" up -d
+
+# It takes a while for notebook to start, wait for this
+echo "Waiting 2 seconds for Jupyter notebook to start..."
+sleep 2s
+
+# List the running jupyter notebook instances and get the notebook URL
+INSTANCE_LIST=$(docker exec -i -t spark_spark_1 jupyter notebook list)
+NOTEBOOK_URL=$(echo "$INSTANCE_LIST" | tail -n 1 | sed 's/\ *//;s/\ ::.*//')
+
+# Open Notebook in the default browser
+echo "Opening Jupyter Notebook in your default browser..."
+xdg-open $NOTEBOOK_URL
+
+# Show the URL of the running notebook instance
+echo
+echo "Notebook is running at:"
+echo "$NOTEBOOK_URL"
+echo
+
 echo "Done"
+
