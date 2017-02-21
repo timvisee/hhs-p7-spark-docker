@@ -6,8 +6,9 @@ MY_PATH="`dirname \"$0\"`"
 # Script constants
 PROJECT_NAME="spark"
 PROJECT_WORK_DIR="$MY_PATH/work"
+CONTAINER_HOME="/home/jovyan"
 
-# Install everything if the work directory doesn't exist
+# Start the installation script if the work directory doesn't exist
 if [ ! -d "$PROJECT_WORK_DIR" ]; then
     echo "Starting installation script..."
     ./install
@@ -15,13 +16,18 @@ else
     echo "The work directory exists."
 fi
 
-# Start the docker container and detach
+# Start the docker container
 echo "Starting Spark container using Docker..."
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # It takes a while for notebook to start, wait for this
 echo "Waiting 2 seconds for Jupyter notebook to start..."
 sleep 2s
+
+# Copy installation script to the container, and run it
+ech "Running set up script on container..."
+sudo docker cp "./container/setup" "spark_spark_1:$CONTAINER_HOME/setup"
+sudo docker exec spark_spark_1 "$CONTAINER_HOME/setup"
 
 # List the running jupyter notebook instances and get the notebook URL
 INSTANCE_LIST=$(sudo docker exec -i -t spark_spark_1 jupyter notebook list)
@@ -36,7 +42,7 @@ echo
 echo "Notebook is running at:"
 echo "$NOTEBOOK_URL"
 echo
-echo "Use ./stop to stop the container"
+echo "Use './stop' to stop the container"
 
 echo "Done"
 

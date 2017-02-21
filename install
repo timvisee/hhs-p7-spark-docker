@@ -10,12 +10,6 @@ PROJECT_RESOURCE_DIR="$MY_PATH/res"
 # Pull the docker image
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" pull
 
-# Create the resource directory if it doesn't exist
-if [ ! -d "$PROJECT_RESOURCE_DIR" ]; then
-    echo "Creating resource directory..."
-    mkdir "$PROJECT_RESOURCE_DIR"
-fi
-
 # Create the work directory
 if [ ! -d "$PROJECT_WORK_DIR" ]; then
     echo "Createing working directory..."
@@ -23,56 +17,6 @@ if [ ! -d "$PROJECT_WORK_DIR" ]; then
     sudo chmod 777 "$PROJECT_WORK_DIR"
 else
     echo "The work directory exists."
-fi
-
-# Check whether the tutorial files are available
-if [ ! -d "$PROJECT_WORK_DIR/tutorials" ]; then
-    echo "Tutorials directory doesn't exist"
-    
-    # Download the tutorials file
-    echo "Downloading tutorial resources..."
-    wget -O "$PROJECT_RESOURCE_DIR/tutorial.v0.3.zip" "https://dl.dropboxusercontent.com/u/8495623/hhs-p7-spark-docker/tutorials_v0.3.zip"
-
-    # Install the tutorials
-    echo "Installing tutorials..."
-    cd "$PROJECT_WORK_DIR"
-    unzip ../res/tutorial.v0.3.zip
-    cd -
-
-    # Remove the tutorials file
-    rm "$PROJECT_RESOURCE_DIR/tutorials.v0.3.zip"
-else
-    echo "Tutorials are installed."
-fi
-
-# Check whether the assignments are available
-if [ ! -d "$PROJECT_WORK_DIR/assignments" ]; then
-    echo "Assignments directory doesn't exist"
-    
-    # Download the assignments file
-    echo "Downloading assignment resources..."
-    wget -O "$PROJECT_RESOURCE_DIR/assignments.v0.2.zip" "https://dl.dropboxusercontent.com/u/8495623/hhs-p7-spark-docker/assignments_v0.2.zip"
-
-    # Install the assignments
-    echo "Installing assignments..."
-    cd "$PROJECT_WORK_DIR"
-    unzip ../res/assignments.v0.2.zip
-    cd -
-
-    # Remove the assignments file
-    rm "$PROJECT_RESOURCE_DIR/assignments.v0.2.zip"
-else
-    echo "Assignments are installed."
-fi
-
-# Check whether the tutorials data is available
-if [ ! -f "$PROJECT_WORK_DIR/tutorials/data/babynames.csv" ]; then
-    echo "Tutorials data directory doesn't exist"
-    
-    echo "Copying data from assignments to tutorials..."
-    cp "$PROJECT_WORK_DIR/assignments/data" "$PROJECT_WORK_DIR/tutorials/" -R
-else
-    echo "Tutorials data is installed."
 fi
 
 echo "Installation is done."
