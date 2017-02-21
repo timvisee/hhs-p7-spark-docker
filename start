@@ -37,7 +37,7 @@ NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
 # Open Notebook in the default browser
 echo "Opening Jupyter Notebook in your default browser..."
-xdg-open $NOTEBOOK_URL
+xdg-open "$NOTEBOOK_URL"
 
 # Show the URL of the running notebook instance
 echo

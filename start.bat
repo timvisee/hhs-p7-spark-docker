@@ -39,9 +39,9 @@ REM Open Notebook in the default browser
 explorer "%NOTEBOOK_URL%"
 
 REM Show the URL of the running notebook instance
-@echo
+@echo.
 @echo "Notebook is running at:"
 @echo "%NOTEBOOK_URL%"
-@echo
+@echo.
 @echo "Use 'stop.bat' to stop the container."
 

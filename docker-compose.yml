@@ -10,4 +10,3 @@ spark:
     volumes:
         - './work:/home/jovyan/work'
 
-
