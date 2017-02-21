@@ -1,6 +1,11 @@
 # HHS P7 Spark in Docker
 Spark setup in a Docker container for use on college HHS P7.
 
+## Requirements
+* Linux operating system (Windows support comming soon)
+* Docker
+* Docker composer
+
 ## Usage
 This is currently for Linux machines only:
 * Clone the project repository (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
