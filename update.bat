@@ -3,7 +3,7 @@ cls
 
 title Updating container...
 
-# Header
+REM Header
 @echo "Updating container scripts..."
 
 @echo "Fetching new updates..."
