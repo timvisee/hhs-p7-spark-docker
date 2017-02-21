@@ -22,8 +22,8 @@ REM Start the docker container
 docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" up -d
 
 REM Copy installation script to the container, and run it
-docker cp "container/setup" "spark_spark_1:%CONTAINER_HOME%/setup"
-docker cp "container/geturl" "spark_spark_1:%CONTAINER_HOME%/geturl"
+docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/setup -O "%CONTAINER_HOME%/setup
+docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/geturl -O "%CONTAINER_HOME%/geturl
 docker exec spark_spark_1 "%CONTAINER_HOME%/setup"
 
 REM It takes a while for notebook to start, wait for this
