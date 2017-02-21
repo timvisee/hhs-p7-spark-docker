@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
 # Get the current path
 MY_PATH="`dirname \"$0\"`"
 

@@ -20,7 +20,7 @@ The base Docker image that is used for this container can be found [here](https:
 ## Requirements
 * Linux, Mac OS X or Windows 10 operating system
 * [Docker](https://www.docker.com/)
-* Docker composer (should come with docker)
+* Docker composer (should come with Docker)
 * [Git](https://git-scm.com/)
 * ~6GB of free space
 
@@ -28,7 +28,7 @@ The base Docker image that is used for this container can be found [here](https:
 Follow these steps to get the container up and running.
 * Clone the project repository (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
 * Change into the project repository (`cd hhs-p7-webshop-project`)
-* Start the container script
+* Install and start the container:
     * Linux/OSX: `./start`
     * Windows: `start.bat`
 
