@@ -23,15 +23,15 @@ sudo docker-compose -f "$MY_PATH/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # Copy installation script to the container, and run it
 sudo docker cp "$MY_PATH/container/setup" "spark_spark_1:$CONTAINER_HOME/setup"
+sudo docker cp "$MY_PATH/container/geturl" "spark_spark_1:$CONTAINER_HOME/geturl"
 sudo docker exec spark_spark_1 "$CONTAINER_HOME/setup"
 
 # It takes a while for notebook to start, wait for this
 echo "Waiting 2 seconds for Jupyter notebook to start..."
 sleep 2s
 
-# List the running jupyter notebook instances and get the notebook URL
-INSTANCE_LIST=$(sudo docker exec -i -t spark_spark_1 jupyter notebook list)
-NOTEBOOK_URL=$(echo "$INSTANCE_LIST" | tail -n 1 | sed 's/\ *//;s/\ ::.*//')
+# Get the URL of the running notebook instance
+NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
 # Open Notebook in the default browser
 echo "Opening Jupyter Notebook in your default browser..."
