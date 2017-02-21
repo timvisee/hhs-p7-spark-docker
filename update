@@ -4,7 +4,7 @@
 cd "`dirname \"$0\"`"
 
 # Header
-echo "Container update script."
+echo "Updating container scripts..."
 
 echo "Fetching new updates..."
 git fetch
@@ -13,5 +13,5 @@ echo "Checking out latest version..."
 git checkout origin master
 
 cd -
-echo "Done."
+echo "Update done."
 
