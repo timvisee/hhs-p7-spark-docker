@@ -24,7 +24,7 @@ echo "Waiting 2 seconds for Jupyter notebook to start..."
 sleep 2s
 
 # List the running jupyter notebook instances and get the notebook URL
-INSTANCE_LIST=$(docker exec -i -t spark_spark_1 jupyter notebook list)
+INSTANCE_LIST=$(sudo docker exec -i -t spark_spark_1 jupyter notebook list)
 NOTEBOOK_URL=$(echo "$INSTANCE_LIST" | tail -n 1 | sed 's/\ *//;s/\ ::.*//')
 
 # Open Notebook in the default browser
