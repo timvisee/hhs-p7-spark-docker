@@ -1,0 +1,6 @@
+spark:
+    image: 'jupyter/all-spark-notebook'
+    ports:
+        - '8888:8888'
+#    volumes:
+#        - './drive:/mnt/drive'
