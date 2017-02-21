@@ -1,0 +1,3 @@
+#!/bin/bash
+
+jupyter notebook list | tail -n 1 | sed 's/\ *//;s/\ ::.*//'
