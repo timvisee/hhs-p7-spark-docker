@@ -6,5 +6,5 @@ PROJECT_NAME="spark"
 # Start the docker container and detach
 echo "Stopping running Spark container in Docker..."
 sudo docker-compose -p "$PROJECT_NAME" stop
-echo "Done"
+echo "All Spark containers have been stopped."
 

@@ -7,7 +7,11 @@ MY_PATH="`dirname \"$0\"`"
 PROJECT_WORK_DIR="$MY_PATH/work"
 PROJECT_RESOURCE_DIR="$MY_PATH/res"
 
+# Header
+echo "Installation script."
+
 # Pull the docker image
+echo "Updating container image..."
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" pull
 
 # Create the work directory
@@ -15,8 +19,6 @@ if [ ! -d "$PROJECT_WORK_DIR" ]; then
     echo "Createing working directory..."
     mkdir "$PROJECT_WORK_DIR"
     sudo chmod 777 "$PROJECT_WORK_DIR"
-else
-    echo "The work directory exists."
 fi
 
 echo "Installation is done."
