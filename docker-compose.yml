@@ -1,6 +1,11 @@
 spark:
+    hostname: 'spark'
     image: 'jupyter/all-spark-notebook'
     ports:
         - '8888:8888'
-#    volumes:
-#        - './drive:/mnt/drive'
+    stdin_open: true
+    tty: true
+    volumes:
+        - './work2:/home/jovyan/work2'
+
+
