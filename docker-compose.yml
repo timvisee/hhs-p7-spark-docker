@@ -6,6 +6,6 @@ spark:
     stdin_open: true
     tty: true
     volumes:
-        - './work2:/home/jovyan/work2'
+        - './work:/home/jovyan/work'
 
 
