@@ -24,14 +24,14 @@ docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" up -d
 REM Copy installation script to the container, and run it
 docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/setup -O "%CONTAINER_HOME%/setup
 docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/geturl -O "%CONTAINER_HOME%/geturl
-docker exec spark_spark_1 "%CONTAINER_HOME%/setup"
+docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/setup"
 
 REM It takes a while for notebook to start, wait for this
 @echo Waiting 2 seconds for Jupyter notebook to start...
 REM sleep 2s
 
 REM Get the URL of the running Juptyer Notebook instance
-docker exec spark_spark_1 "%CONTAINER_HOME%/setup" > url.txt
+docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
 SET /p NOTEBOOK_URL=<url.txt
 
 REM Open Notebook in the default browser
