@@ -1,5 +1,4 @@
 @echo off
-cls
 
 title Updating container...
 
