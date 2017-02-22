@@ -112,8 +112,8 @@ EXPOSE 8888
 # Create the notebook directory
 RUN mkdir /root/notebook
 
-# Copy the start script
-COPY start /root/start
+# Copy the boostrap script
+COPY start /root/bootstrap
 
-# Set the start command
-CMD /root/start
+# Set the bootstrap command
+CMD /root/bootstrap
