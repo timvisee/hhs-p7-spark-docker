@@ -30,7 +30,6 @@ sudo docker exec spark_spark_1 "$CONTAINER_HOME/setup"
 
 # It takes a while for notebook to start, wait for this
 echo "Waiting 2 seconds for Jupyter notebook to start..."
-sleep 2s
 
 # Get the URL of the running notebook instance
 NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
