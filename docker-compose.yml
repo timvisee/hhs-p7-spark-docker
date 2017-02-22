@@ -1,6 +1,6 @@
 spark:
     hostname: 'spark'
-    image: 'timvisee/hhs-p7-spark-docker'
+    image: 'timvisee/hhs-p7-spark-docker:latest'
     ports:
         - '8888:8888'
     stdin_open: true
