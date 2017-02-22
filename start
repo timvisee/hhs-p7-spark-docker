@@ -7,31 +7,24 @@ MY_PATH="`dirname \"$0\"`"
 
 # Script constants
 PROJECT_NAME="spark"
-PROJECT_WORK_DIR="$MY_PATH/work"
-CONTAINER_HOME="/home/jovyan"
+PROJECT_NOTEBOOK_DIR="$MY_PATH/notebook"
+CONTAINER_HOME="/root"
 
 # Header
-echo "Preparing to start Spark container..."
+echo "Preparing to start container..."
 
-# Start the installation script if the work directory doesn't exist
-if [ ! -d "$PROJECT_WORK_DIR" ]; then
-    echo "The work directory isn't available, starting installation script..."
+# Start the installation script if the notebook directory doesn't exist
+if [ ! -d "$PROJECT_NOTEBOOK_DIR" ]; then
+    echo "The notebook directory isn't available, starting installation script..."
     ./install
 fi
 
 # Start the docker container
-echo "Starting Spark container using Docker..."
+echo "Starting container using Docker..."
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
-# Copy installation script to the container, and run it
-sudo docker cp "$MY_PATH/container/setup" "spark_spark_1:$CONTAINER_HOME/setup"
-sudo docker cp "$MY_PATH/container/geturl" "spark_spark_1:$CONTAINER_HOME/geturl"
-sudo docker exec spark_spark_1 "$CONTAINER_HOME/setup"
-
-# It takes a while for notebook to start, wait for this
-echo "Waiting 2 seconds for Jupyter notebook to start..."
-
 # Get the URL of the running notebook instance
+echo "Waiting 2 seconds for Jupyter notebook to start..."
 NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
 # Open Notebook in the default browser

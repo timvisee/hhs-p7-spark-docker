@@ -4,32 +4,24 @@ title Starting container...
 
 REM Script constants
 SET PROJECT_NAME=spark
-SET PROJECT_WORK_DIR=.\work
-SET CONTAINER_HOME=/home/jovyan
+SET PROJECT_NOTEBOOK_DIR=.\notebook
+SET CONTAINER_HOME=/root
 
 REM Header
-@echo Preparing to start Spark container...
+@echo Preparing to start container...
 
-REM Start the installation script if the work directory doesn't exist
-IF NOT EXIST "%PROJECT_WORK_DIR%" (
-    @echo The work directory isn't available, starting installation script...
+REM Start the installation script if the directory doesn't exist
+IF NOT EXIST "%PROJECT_NOTEBOOK_DIR%" (
+    @echo The notebook directory isn't available, starting installation script...
     call install.bat
 )
 
 REM Start the docker container
-@echo Starting Spark container using Docker...
+@echo Starting container using Docker...
 docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" up -d
 
-REM Copy installation script to the container, and run it
-docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/setup -O "%CONTAINER_HOME%/setup
-docker exec spark_spark_1 wget https://raw.githubusercontent.com/timvisee/hhs-p7-spark-docker/master/container/geturl -O "%CONTAINER_HOME%/geturl
-docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/setup"
-
-REM It takes a while for notebook to start, wait for this
-@echo Waiting 2 seconds for Jupyter notebook to start...
-REM sleep 2s
-
 REM Get the URL of the running Juptyer Notebook instance
+@echo Waiting 2 seconds for Jupyter notebook to start...
 docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
 SET /p NOTEBOOK_URL=<url.txt
 
