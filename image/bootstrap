@@ -15,8 +15,6 @@ export PYSPARK_DRIVER_PYTHON_OPTS="
     --NotebookApp.port=$NOTEBOOK_PORT
     --notebook-dir=$NOTEBOOK_DIR"
 
-sleep 2s
-
 # Set up the assignment files
 echo "Checking assignment files..."
 if [ ! -d "$NOTEBOOK_DIR/assignments" ]; then
