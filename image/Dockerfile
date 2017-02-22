@@ -41,7 +41,34 @@ RUN cd /tmp \
  && rm miniconda.sh \
  && $CONDA_DIR/bin/conda install --yes conda==$MINICONDA_VER
 
+# TODO: Install SBT and Java
+
+# Configure Spark
+ENV SPARK_VER 2.0.1
+ENV HADOOP_VER 2.7
+ENV SPARK_PACKAGE_NAME spark-$SPARK_VER-bin-hadoop$HADOOP_VER
+ENV SPARK_PACKAGE $SPARK_PACKAGE_NAME.tgz
+ENV SPARK_URL http://www-eu.apache.org/dist/spark/spark-$SPARK_VER/$SPARK_PACKAGE
+ENV SPARK_MD5_SUM 43aa7c28b9670e65cb4f395000838860
+
+# Download and install Spark
+RUN cd /tmp \
+ && wget $SPARK_URL -O spark.tgz \
+ && echo "$SPARK_MD5_SUM  spark.tgz" | md5sum -c - \
+ && tar xzvf spark.tgz \
+ && mv $SPARK_PACKAGE_NAME/ spark \
+ && sudo mv spark/ /usr/lib/
+
+# Install Jupyter
+RUN $CONDA_DIR/bin/conda install jupyter
+
 # Delete cache
 RUN rm -rf /var/cache/apk/* \
  && rm -rf /tmp/glibc*apk \
  && rm -rf /root/.cache
+
+# Copy the start script
+COPY start /root/start
+
+# Set the start command
+CMD /root/start
