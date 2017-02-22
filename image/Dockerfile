@@ -99,8 +99,6 @@ ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
 RUN $CONDA_DIR/bin/conda install --yes jupyter notebook
 RUN $CONDA_DIR/bin/conda clean -tipsy
 
-# TODO: Install jupyterhub with conda
-
 # Delete cache
 RUN rm -rf /var/cache/apk/* \
  && rm -rf /tmp/glibc*apk \
@@ -109,11 +107,13 @@ RUN rm -rf /var/cache/apk/* \
 # Explose port 8888
 EXPOSE 8888
 
-# Create the notebook directory
-RUN mkdir /root/notebook
+# Copy some required scripts
+COPY setup /root/setup
+COPY geturl /root/geturl
+COPY bootstrap /root/bootstrap
 
-# Copy the boostrap script
-COPY start /root/bootstrap
+# Set up the container
+RUN bash /root/setup
 
-# Set the bootstrap command
-CMD /root/bootstrap
+# Run the boostrap command on start
+CMD bash /root/bootstrap
