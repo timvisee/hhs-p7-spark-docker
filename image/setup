@@ -34,4 +34,3 @@ echo "Configuring tutorials data..."
 cp "$PROJECT_RESOURCE_DIR/assignments/data" "$PROJECT_RESOURCE_DIR/tutorials/" -R
 
 echo "The container has been configured."
-

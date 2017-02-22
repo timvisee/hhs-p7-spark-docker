@@ -2,8 +2,8 @@
 
 # Constants
 NOTEBOOK_DIR="/root/notebook"
-NOTEBOOK_DIR=8888
-RESOURCE_DIR="/root/notebook"
+NOTEBOOK_PORT=8888
+RESOURCE_DIR="/root/res"
 
 # Set up the PySpark environment
 export PYSPARK_PYTHON="python3"
@@ -15,16 +15,20 @@ export PYSPARK_DRIVER_PYTHON_OPTS="
     --NotebookApp.port=$NOTEBOOK_PORT
     --notebook-dir=$NOTEBOOK_DIR"
 
+sleep 2s
+
 # Set up the assignment files
+echo "Checking assignment files..."
 if [ ! -d "$NOTEBOOK_DIR/assignments" ]; then
     echo "Setting up assignment files..."
-    cp "$RESOURCE_DIR/assignments" "$NOTEBOOK_DIR/"
+    cp "$RESOURCE_DIR/assignments" "$NOTEBOOK_DIR/" -R
 fi
 
 # Set up the tutorial files
+echo "Checking tutorial files..."
 if [ ! -d "$NOTEBOOK_DIR/tutorials" ]; then
     echo "Setting up tutorial files..."
-    cp "$RESOURCE_DIR/tutorials" "$NOTEBOOK_DIR/"
+    cp "$RESOURCE_DIR/tutorials" "$NOTEBOOK_DIR/" -R
 fi
 
 # Start PySpark
