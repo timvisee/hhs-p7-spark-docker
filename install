@@ -6,21 +6,20 @@
 MY_PATH="`dirname \"$0\"`"
 
 # Script constants
-PROJECT_WORK_DIR="$MY_PATH/work"
-PROJECT_RESOURCE_DIR="$MY_PATH/res"
+PROJECT_NOTEBOOK_DIR="$MY_PATH/notebook"
 
 # Header
 echo "Installation script."
 
 # Pull the docker image
-echo "Updating container image..."
+echo "Pulling container image..."
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" pull
 
 # Create the work directory
-if [ ! -d "$PROJECT_WORK_DIR" ]; then
-    echo "Createing working directory..."
-    mkdir "$PROJECT_WORK_DIR"
-    sudo chmod 777 "$PROJECT_WORK_DIR"
+if [ ! -d "$PROJECT_NOTEBOOK_DIR" ]; then
+    echo "Creating notebook directory..."
+    mkdir "$PROJECT_NOTEBOOK_DIR"
+    sudo chmod 777 "$PROJECT_NOTEBOOK_DIR"
 fi
 
 echo "Installation is done."
