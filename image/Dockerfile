@@ -96,7 +96,7 @@ RUN cd /tmp \
 ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
 
 # Install Jupyter
-RUN $CONDA_DIR/bin/conda install --yes jupyter notebook jupyter
+RUN $CONDA_DIR/bin/conda install --yes jupyter notebook
 RUN $CONDA_DIR/bin/conda clean -tipsy
 
 # TODO: Install jupyterhub with conda
