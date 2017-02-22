@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Script constants
+PROJECT_DIR="/root"
+PROJECT_REPO_URL="https://github.com/timvisee/hhs-p7-spark-docker.git"
+PROJECT_REPO_DIR="$PROJECT_DIR/repo"
+PROJECT_NOTEBOOK_DIR="$PROJECT_DIR/notebook"
+PROJECT_RESOURCE_DIR="$PROJECT_DIR/res"
+
+# Header
+echo "Setting up the container resources..."
+
+# Create the notebook directory
+echo "Creating notebook directory..."
+mkdir $PROJECT_NOTEBOOK_DIR
+
+# Clone the repository
+# TODO: Do a sparce clone here!
+echo "Clone the repository with it's resources..."
+git clone $PROJECT_REPO_URL $PROJECT_REPO_DIR
+
+# Configure the assignments
+cd $PROJECT_NOTEBOOK_DIR
+echo "Configuring assignment files..."
+unzip "$PROJECT_REPO_DIR/res/assignments_v0.2.zip"
+
+# Configure the tutorials
+echo "Configuring tutorial files..."
+unzip "$PROJECT_REPO_DIR/res/tutorials_v0.3.zip"
+
+# Configure the tutorials data
+echo "Configuring tutorials data..."
+cp "$PROJECT_NOTEBOOK_DIR/assignments/data" "$PROJECT_NOTEBOOK_DIR/tutorials/" -R
+
+echo "The container has been configured."
+
