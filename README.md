@@ -1,6 +1,7 @@
 # HHS P7 Spark in Docker
 A Docker image with a set of scripts to use and set up a container running
 Apache Spark with PySpark, Jupyter Notebook and some other common tools.
+College resources are preinstalled!
 With this project you can get a container up and running with a single command.
 
 This container is intended for college, period 7 of HBO-ICT on the HHS,
