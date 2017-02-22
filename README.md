@@ -5,7 +5,7 @@ College resources are preinstalled!
 With this project you can get a container up and running with a single command.
 
 This container is intended for college, period 7 of HBO-ICT on the HHS,
-and automatically installs various resources that are used in class.
+and has various resources and assignments used in class preinstalled.
 
 ## Features
 * Single command to get everything up and running!
