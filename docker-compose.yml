@@ -1,12 +1,10 @@
 spark:
     hostname: 'spark'
-    image: 'jupyter/all-spark-notebook'
+    image: 'timvisee/hhs-p7-spark-docker'
     ports:
         - '8888:8888'
     stdin_open: true
     tty: true
-    environment:
-        - GRAND_SUDO=yes
     volumes:
-        - './work:/home/jovyan/work'
+        - './notebook:/root/notebook'
 
