@@ -13,6 +13,11 @@ CONTAINER_HOME="/root"
 # Header
 echo "Preparing to start container..."
 
+# Function to check whether a command exists
+command_exists() {
+    type "$1" &> /dev/null ;
+}
+
 # Start the installation script if the notebook directory doesn't exist
 if [ ! -d "$PROJECT_NOTEBOOK_DIR" ]; then
     echo "The notebook directory isn't available, starting installation script..."
@@ -29,7 +34,15 @@ NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
 # Open Notebook in the default browser
 echo "Opening Jupyter Notebook in your default browser..."
-xdg-open "$NOTEBOOK_URL"
+if command_exists open ; then
+    open "$NOTEBOOK_URL"
+else
+    if command_exists xdg-open ; then
+        xdg-open "$NOTEBOOK_URL"
+    else
+        echo "No command found to open the Notebook URL."
+    fi
+fi
 
 # Show the URL of the running notebook instance
 echo
