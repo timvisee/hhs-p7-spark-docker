@@ -5,11 +5,9 @@ echo "PATH IS: $PATH"
 
 #PATH=/opt/conda/bin:/usr/lib/spark/bin:$PATH
 PYSPARK_PYTHON=/opt/conda/pkgs/python3
-PYSPARK_DRIVER_PYTHON=jupyter
+PYSPARK_DRIVER_PYTHON=Jupyter
 PYSPARK_DRIVER_PYTHON_OPTS="
     --port=8888
+    --no-browser
     --notebook-dir=/root/notebook"
-#    --no-browser
 pyspark --conf spark.driver.maxResultSize=3g --driver-memory 3g
-
-bash
