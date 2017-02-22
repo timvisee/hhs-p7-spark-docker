@@ -10,7 +10,7 @@ REM Header
 git fetch
 
 @echo Checking out latest version...
-git checkout origin master
+git checkout origin/master
 
 echo Update done.
 
