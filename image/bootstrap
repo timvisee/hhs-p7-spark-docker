@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Set up the PySpark environment
 export PYSPARK_PYTHON="python3"
 export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="
@@ -9,4 +10,6 @@ export PYSPARK_DRIVER_PYTHON_OPTS="
     --NotebookApp.port=8888
     --notebook-dir=/root/notebook"
 
+# Start PySpark
+echo "Starting PySpark with Jupyter Notebook..."
 pyspark --conf spark.driver.maxResultSize=3g --driver-memory 3g

@@ -96,8 +96,8 @@ RUN cd /tmp \
 ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
 
 # Install Jupyter
-RUN $CONDA_DIR/bin/conda install --yes jupyter notebook
-RUN $CONDA_DIR/bin/conda clean -tipsy
+RUN $CONDA_DIR/bin/conda install --yes jupyter notebook \
+ && $CONDA_DIR/bin/conda clean -tipsy
 
 # Delete cache
 RUN rm -rf /var/cache/apk/* \
