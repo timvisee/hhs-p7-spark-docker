@@ -16,10 +16,6 @@ mkdir $PROJECT_NOTEBOOK_DIR
 echo "Creating resources directory..."
 mkdir $PROJECT_RESOURCE_DIR
 
-# Copy the resources over
-COPY ../res/assignments_v0.2.zip "$PROJECT_RESOURCE_DIR/assignments_v0.2.zip"
-COPY ../res/tutorials_v0.3.zip "$PROJECT_RESOURCE_DIR/tutorials_v0.3.zip"
-
 # Configure the assignments
 cd $PROJECT_NOTEBOOK_DIR
 echo "Configuring assignment files..."

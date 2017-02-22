@@ -112,6 +112,10 @@ COPY setup /root/setup
 COPY geturl /root/geturl
 COPY bootstrap /root/bootstrap
 
+# Copy some resources
+COPY ..res/assignments_v0.2.zip "/home/root/res/assignments_v0.2.zip"
+COPY ..res/tutorials_v0.3.zip "/home/root/res/tutorials_v0.3.zip"
+
 # Set up the container
 RUN bash /root/setup
 
