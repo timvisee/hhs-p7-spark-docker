@@ -13,7 +13,7 @@ REM Header
 REM Start the installation script if the work directory doesn't exist
 IF NOT EXIST "%PROJECT_WORK_DIR%" (
     @echo The work directory isn't available, starting installation script...
-    install.bat
+    call install.bat
 )
 
 REM Start the docker container
