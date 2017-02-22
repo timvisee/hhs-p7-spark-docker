@@ -106,7 +106,11 @@ RUN rm -rf /var/cache/apk/* \
  && rm -rf /tmp/glibc*apk \
  && rm -rf /root/.cache
 
+# Explose port 8888
 EXPOSE 8888
+
+# Create the notebook directory
+RUN mkdir /root/notebook
 
 # Copy the start script
 COPY start /root/start
