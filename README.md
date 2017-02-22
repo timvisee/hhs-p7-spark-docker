@@ -9,9 +9,9 @@ and has various resources and assignments used in class preinstalled.
 
 ## Features
 * Single command to get everything up and running!
-* Jupyter Notebook 4.3.x
-* PySpark
-* Python 3.5
+* Jupyter Notebook 4.3.0
+* PySpark 2.0.1
+* Python 3.5.1
 * Spark 2.0.1
 * Hadoop 2.7
 * College resources preinstalled.
