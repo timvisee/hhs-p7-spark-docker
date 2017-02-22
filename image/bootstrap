@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Constants
+NOTEBOOK_DIR="/root/notebook"
+NOTEBOOK_DIR=8888
+RESOURCE_DIR="/root/notebook"
+
 # Set up the PySpark environment
 export PYSPARK_PYTHON="python3"
 export PYSPARK_DRIVER_PYTHON="jupyter"
@@ -7,8 +12,20 @@ export PYSPARK_DRIVER_PYTHON_OPTS="
     notebook
     --NotebookApp.open_browser=False
     --NotebookApp.ip='*'
-    --NotebookApp.port=8888
-    --notebook-dir=/root/notebook"
+    --NotebookApp.port=$NOTEBOOK_PORT
+    --notebook-dir=$NOTEBOOK_DIR"
+
+# Set up the assignment files
+if [ ! -d "$NOTEBOOK_DIR/assignments" ]; then
+    echo "Setting up assignment files..."
+    cp "$RESOURCE_DIR/assignments" "$NOTEBOOK_DIR/"
+fi
+
+# Set up the tutorial files
+if [ ! -d "$NOTEBOOK_DIR/tutorials" ]; then
+    echo "Setting up tutorial files..."
+    cp "$RESOURCE_DIR/tutorials" "$NOTEBOOK_DIR/"
+fi
 
 # Start PySpark
 echo "Starting PySpark with Jupyter Notebook..."

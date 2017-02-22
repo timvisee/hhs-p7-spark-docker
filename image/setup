@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script constants
+# Constants
 PROJECT_DIR="/root"
 PROJECT_NOTEBOOK_DIR="$PROJECT_DIR/notebook"
 PROJECT_RESOURCE_DIR="$PROJECT_DIR/res"
@@ -12,18 +12,26 @@ echo "Setting up the container resources..."
 echo "Creating notebook directory..."
 mkdir $PROJECT_NOTEBOOK_DIR
 
+# Create the resource directory
+echo "Creating resource directory..."
+mkdir $PROJECT_RESOURCE_DIR
+
 # Configure the assignments
-cd $PROJECT_NOTEBOOK_DIR
+cd $PROJECT_RESOURCE_DIR
 echo "Configuring assignment files..."
-unzip "$PROJECT_RESOURCE_DIR/assignments_v0.2.zip"
+unzip "/tmp/assignments_v0.2.zip"
 
 # Configure the tutorials
 echo "Configuring tutorial files..."
-unzip "$PROJECT_RESOURCE_DIR/tutorials_v0.3.zip"
+unzip "/tmp/tutorials_v0.3.zip"
+
+# Remove the zipped resource files
+rm "/tmp/assignments_v0.2.zip"
+rm "/tmp/tutorials_v0.3.zip"
 
 # Configure the tutorials data
 echo "Configuring tutorials data..."
-cp "$PROJECT_NOTEBOOK_DIR/assignments/data" "$PROJECT_NOTEBOOK_DIR/tutorials/" -R
+cp "$PROJECT_RESOURCE_DIR/assignments/data" "$PROJECT_RESOURCE_DIR/tutorials/" -R
 
 echo "The container has been configured."
 
