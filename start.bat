@@ -36,7 +36,7 @@ SET /p NOTEBOOK_URL=<url.txt
 
 REM Open Notebook in the default browser
 @echo Opening Jupyter Notebook in your default browser...
-explorer %NOTEBOOK_URL%
+start %NOTEBOOK_URL%
 
 REM Show the URL of the running notebook instance
 @echo.
