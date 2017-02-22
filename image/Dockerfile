@@ -93,6 +93,8 @@ RUN cd /tmp \
  && mv $SPARK_PACKAGE_NAME/ spark \
  && sudo mv spark/ /usr/lib/
 
+ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
+
 # Install Jupyter
 RUN $CONDA_DIR/bin/conda install jupyter
 
