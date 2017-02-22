@@ -15,7 +15,7 @@ echo "Installation script."
 echo "Pulling container image..."
 sudo docker-compose -f "$MY_PATH/docker-compose.yml" pull
 
-# Create the work directory
+# Create the notebook directory
 if [ ! -d "$PROJECT_NOTEBOOK_DIR" ]; then
     echo "Creating notebook directory..."
     mkdir "$PROJECT_NOTEBOOK_DIR"

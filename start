@@ -34,13 +34,17 @@ NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
 # Open Notebook in the default browser
 echo "Opening Jupyter Notebook in your default browser..."
-if command_exists open ; then
-    open "$NOTEBOOK_URL"
+if command_exists gnome-open ; then
+    gnome-open "$NOTEBOOK_URL"
 else
-    if command_exists xdg-open ; then
-        xdg-open "$NOTEBOOK_URL"
+    if command_exists fish ; then
+        fish open "$NOTEBOOK_URL"
     else
-        echo "No command found to open the Notebook URL."
+        if command_exists xdg-open ; then
+            xdg-open "$NOTEBOOK_URL"
+        else
+            echo "No command found to open the Notebook URL."
+        fi
     fi
 fi
 
