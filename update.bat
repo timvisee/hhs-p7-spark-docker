@@ -5,6 +5,9 @@ title Updating container...
 REM Header
 @echo Updating container scripts...
 
+REM Stop running containers
+call stop.bat
+
 @echo Fetching new updates...
 git fetch
 

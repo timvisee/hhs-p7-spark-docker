@@ -8,6 +8,9 @@ cd "`dirname \"$0\"`"
 # Header
 echo "Updating container scripts..."
 
+# Stop running containers
+./stop
+
 echo "Fetching new updates..."
 git fetch
 
