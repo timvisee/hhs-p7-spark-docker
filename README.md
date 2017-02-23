@@ -26,7 +26,7 @@ and has various resources and assignments used in class preinstalled.
 ## Usage
 Follow these steps to get the container up and running.
 * Clone the project repository (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
-* Change into the project repository (`cd hhs-p7-webshop-project`)
+* Change into the project repository (`cd hhs-p7-spark-docker`)
 * If on Windows, enable sharing of your primary drive in the Docker settings.
 * Install and start the container:
     * Linux/OSX: `./start`
