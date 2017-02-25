@@ -1,11 +1,21 @@
 # HHS P7 Spark in Docker
-A Docker image with a set of scripts to use and set up a container running
-Apache Spark with PySpark, Jupyter Notebook and some other common tools.
-College resources are preinstalled!
-With this project you can get a container up and running with a single command.
+This project allows you to get PySpark with Jupyter Notebook up and running
+with a single command!
+
+This project uses a container based solution using Docker. It sets up an
+isolated 'container' that has all required software pre-installed. This
+is comparable to a virtual machine, but it's much more flexible and has
+near-native performance. All this is done automatically, with nothing to
+worry about.
+
+This project provides a custom Docker image with a set of scripts to use and
+set up a container running Apache Spark with PySpark, Jupyter Notebook and some
+other common tools.
 
 This container is intended for college, period 7 of HBO-ICT on the HHS,
-and has various resources and assignments used in class preinstalled.
+and has various resources and assignments used in class preinstalled!
+
+Check out the [usage](#usage) section for installation instructions.
 
 ## Features
 * Single command to get everything up and running!
@@ -17,7 +27,10 @@ and has various resources and assignments used in class preinstalled.
 * College resources preinstalled.
 
 ## Requirements
-* Linux, Mac OS X or Windows 10 Professional/Enterprise
+* Operating system:
+    * Linux
+    * Mac OS X _(not yet tested)_
+    * Windows 10 Professional or Enterprise
 * [Docker](https://www.docker.com/)
 * Docker composer (should come with Docker)
 * [Git](https://git-scm.com/)
@@ -25,8 +38,12 @@ and has various resources and assignments used in class preinstalled.
 
 ## Usage
 Follow these steps to get the container up and running.
-* Clone the project repository (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
-* Change into the project repository (`cd hhs-p7-spark-docker`)
+* Make sure you meet all [requirements](#requirements) above,
+  install missing software.
+* Clone the project repository
+  (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
+* Change into the project repository
+  (`cd hhs-p7-spark-docker`)
 * If on Windows, enable sharing of your primary drive in the Docker settings.
 * Install and start the container:
     * Linux/OSX: `./start`
