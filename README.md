@@ -24,12 +24,13 @@ Check out the [usage](#usage) section for installation instructions.
 * Python 3.5.1
 * Spark 2.0.1
 * Hadoop 2.7
+* Based on Alpine Linux.
 * College resources preinstalled.
 
 ## Requirements
 * Operating system:
     * Linux
-    * Mac OS X _(not yet tested)_
+    * Mac OS X _(not yet tested, should work)_
     * Windows 10 Professional or Enterprise
 * [Docker](https://www.docker.com/)
 * Docker composer (should come with Docker)
@@ -79,6 +80,30 @@ On Windows it is required to enable drive sharing in the Docker settings on the
 drive the repository and container is installed on. The notebook directory
 should be in the same location, but it might differ depending on the
 configuration.
+
+## FAQ
+#### How do I open Jupyter Notebook in my browser?
+Jupyter Notebook should automatically open in your browser when you start the
+container.
+If the container is already running, simply run `./start` / `start.bat` again
+to re-open Jupyer Notebook.
+
+#### Do I need to enable VT-x / Virtualization?
+Yes, virtualization must be enabled to use this container.
+The Docker installer should notify about this.
+Search on Google for how to enable virtualization on your specific system.
+
+#### Can I access the files in Jupyter Notebook?
+Yes, these files are available in a sub directory.
+See the [data directory](#data-directory) section.
+
+#### Can I safely stop the container?
+Yes. All data will remain intact.
+The container can be stopped using the `./stop` / `stop.bat` command.
+
+#### Does this work on Windows?
+Yes. Even though the container is using a Linux image, Docker ensures that it
+will run on Windows too.
 
 ## License
 This project is released under the GNU GPL-3.0 license.
