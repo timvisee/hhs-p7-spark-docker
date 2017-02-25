@@ -32,21 +32,24 @@ sudo docker-compose -f "$MY_PATH/docker-compose.yml" -p "$PROJECT_NAME" up -d
 echo "Waiting 2 seconds for Jupyter notebook to start..."
 NOTEBOOK_URL=$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")
 
-# Open Notebook in the default browser
-if command_exists firefox ; then
-    echo "Opening Jupyter Notebook in Firefox..."
-    firefox "$NOTEBOOK_URL"
-else
-    echo "Opening Jupyter Notebook in your default browser..."
-    if command_exists fish ; then
-        fish open "$NOTEBOOK_URL"
+# Open Notebook in the default browser depending on the operating system
+if [ $(uname) == "Linux" ]; then
+    if command_exists xdg-open ; then
+	echo "Opening Jupyter Notebook in your default browser..."
+        xdg-open "$NOTEBOOK_URL"
+    elif command_exists firefox ; then
+	echo "Opening Jupyter Notebook in Firefox..."
+        firefox "$NOTEBOOK_URL"
     else
-        if command_exists xdg-open ; then
-            xdg-open "$NOTEBOOK_URL"
-        else
-            echo "No command found to open the Notebook URL."
-        fi
+        echo "No suitable method found to automatically open Jupyter Notebook."
     fi
+
+elif [ $(uname) == "Darwin" ]; then
+    echo "Opening Jupyter Notebook in Safari..."
+    open "$NOTEBOOK_URL"
+
+else
+    echo "Unable to automatically open Jupyter Notebook, unknown platform."
 fi
 
 # Show the URL of the running notebook instance
