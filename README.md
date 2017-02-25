@@ -35,6 +35,7 @@ Check out the [usage](#usage) section for installation instructions.
 * [Docker](https://www.docker.com/)
 * Docker composer (should come with Docker)
 * [Git](https://git-scm.com/)
+* VT-x / virtualization must be enabled.
 * ~1.3GB of free space
 
 ## Usage
