@@ -2,25 +2,27 @@
 
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
-# Get the current path
-MY_PATH="`dirname \"$0\"`"
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Script constants
-PROJECT_NOTEBOOK_DIR="$MY_PATH/notebook"
+NOTEBOOK_DIR="$DIR/notebook"
 
 # Header
-echo "Installation script."
+echo "Starting installation..."
 
 # Pull the docker image
 echo "Pulling container image..."
-sudo docker-compose -f "$MY_PATH/docker-compose.yml" pull
+sudo docker-compose -f "$DIR/docker-compose.yml" pull
 
 # Create the notebook directory
-if [ ! -d "$PROJECT_NOTEBOOK_DIR" ]; then
+if [ ! -d "$NOTEBOOK_DIR" ]; then
     echo "Creating notebook directory..."
-    mkdir "$PROJECT_NOTEBOOK_DIR"
-    sudo chmod 777 "$PROJECT_NOTEBOOK_DIR"
+    mkdir "$NOTEBOOK_DIR"
+
+    echo "Setting proper directory permissions..."
+    sudo chmod 777 "$NOTEBOOK_DIR"
 fi
 
-echo "Installation is done."
+echo "Installation finished!"
 

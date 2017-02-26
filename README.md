@@ -2,6 +2,8 @@
 This project allows you to get PySpark with Jupyter Notebook up and running
 with a single command!
 
+Check out the [usage](#usage) section for installation instructions.
+
 This project uses a container based solution using Docker. It sets up an
 isolated 'container' that has all required software pre-installed. This
 is comparable to a virtual machine, but it's much more flexible and has
@@ -15,8 +17,6 @@ other common tools.
 This container is intended for college, period 7 of HBO-ICT on the HHS,
 and has various resources and assignments used in class preinstalled!
 
-Check out the [usage](#usage) section for installation instructions.
-
 ## Features
 * Single command to get everything up and running!
 * Jupyter Notebook 4.3.0
@@ -24,13 +24,12 @@ Check out the [usage](#usage) section for installation instructions.
 * Python 3.5.1
 * Spark 2.0.1
 * Hadoop 2.7
-* Based on Alpine Linux.
 * College resources preinstalled.
 
 ## Requirements
 * Operating system:
     * Linux
-    * Mac OS X _(not yet tested, should work)_
+    * Mac OS X
     * Windows 10 Professional or Enterprise
 * [Docker](https://www.docker.com/)
 * Docker composer (should come with Docker)
@@ -51,27 +50,31 @@ Follow these steps to get the container up and running.
     * Linux/OSX: `./start`
     * Windows: `start.bat`
 
+It's recommended to use the `./update-and-start` / `update-and-start.bat`
+script in the future to start the container. This will automatically fetch
+new updates when available.
+
 The installation is started automatically when starting for the first time.
 The download of the container image might take a long while as it's around
 1.3GBs in size.
 
-## Commands
-The following commands/scripts are included in the project:
-* Start the container:
-    * Linux/OSX: `./start`
-    * Windows: `start.bat`
-* Stop running containers:
-    * Linux/OSX: `./stop`
-    * Windows: `stop.bat`
-* Install the container:
-    * Linux/OSX: `./install`
-    * Windows: `install.bat`
-* Update the container and it's scripts:
-    * Linux/OSX: `./update`
-    * Windows: `update.bat`
+## Scripts and commands
+The following scripts/commands are included in the project:
+* `./start` / `start.bat`:
+  Start the container (invokes install if required)
+* `./update-and-start` / `update-and-start.bat`:
+  Update and start the contanier (invokes install if required)
+* `./stop` / `stop.bat`:
+  Stop running containers
+* `./install` / `install.bat`:
+  Install the container
+* `./update` / `update.bat`:
+  Update the container and all scripts
+* `./uninstall` / `uninstall.bat`:
+  Uninstall the container and it's resources
 
 To reopen Jupyter Notebook in the browser for a running container,
-simply execute the `./start` / `start.bat` command again.
+simply execute the `./start` / `start.bat` script again.
 
 ## Data directory
 The notebook directory is accessable at `./notebook` in the project repository
@@ -89,7 +92,14 @@ container.
 If the container is already running, simply run `./start` / `start.bat` again
 to re-open Jupyer Notebook.
 
-#### Do I need to enable VT-x / Virtualization?
+#### How do I get updates?
+New updates will automatically be installed if available when running the
+`./update` / `update.bat` script. It's recommended to use the
+`./update-and-start` / `update-and-start.bat` scripts to start the container
+in the future, as this automatically installs any available updates when
+avaialable before the container is starting.
+
+#### Do I need to enable VT-x / virtualization?
 Yes, virtualization must be enabled to use this container.
 The Docker installer should notify about this.
 Search on Google for how to enable virtualization on your specific system.
@@ -103,8 +113,9 @@ Yes. All data will remain intact.
 The container can be stopped using the `./stop` / `stop.bat` command.
 
 #### Does this work on Windows?
-Yes. Even though the container is using a Linux image, Docker ensures that it
-will run on Windows too.
+Yes. Even though the container is based on
+[Alpine Linux](https://alpinelinux.org/), Docker ensures that it will run on
+Windows too.
 
 ## License
 This project is released under the GNU GPL-3.0 license.

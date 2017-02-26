@@ -1,2 +1,14 @@
+# Notebook working directory
 /notebook
+
+# Temporary URL file created on Windows
 url.txt
+
+# Vim swap files
+.*.swp
+
+# Mac OS X junk
+.DS_Store
+
+# Windows junk
+desktop.ini

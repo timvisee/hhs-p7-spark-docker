@@ -2,21 +2,28 @@
 
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
-# Get the current path
-cd "`dirname \"$0\"`"
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Change to the current directory
+cd "$DIR"
 
 # Header
-echo "Updating container scripts..."
+echo "Starting update..."
 
 # Stop running containers
 ./stop
 
-echo "Fetching new updates..."
+echo "Fetching new updates from repository..."
 git fetch
 
 echo "Checking out latest version..."
 git checkout origin/master
 
+echo "Forcing intallation for update..."
+./install
+
 cd -
-echo "Update done."
+echo "Use the './start' command to start the updated container."
+echo "Update finished!"
 
