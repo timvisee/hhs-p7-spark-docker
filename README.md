@@ -47,8 +47,8 @@ Follow these steps to get the container up and running.
   (`cd hhs-p7-spark-docker`)
 * If on Windows, enable sharing of your primary drive in the Docker settings.
 * Install and start the container:
-    * Linux/OSX: `./start`
-    * Windows: `start.bat`
+    * Linux/OSX: `./start` or `./update-and-start`
+    * Windows: `start.bat` or `update-and-start.bat`
 
 It's recommended to use the `./update-and-start` / `update-and-start.bat`
 script in the future to start the container. This will automatically fetch
@@ -84,6 +84,21 @@ On Windows it is required to enable drive sharing in the Docker settings on the
 drive the repository and container is installed on. The notebook directory
 should be in the same location, but it might differ depending on the
 configuration.
+
+## Build it yourself
+First of all, it's not required to build anything yourself. Simply use the
+[start](#usage) script to get things up and running.
+Sometimes however, this is useful if you've manually made changes to the docker
+image configuration, or when you want to debug things.
+
+If you're using a Linux or Mac OS X operating system, it's possible to build
+the container image yourself.
+Simply use the `image/build` script to start a build!
+
+If you've permission to push updates to the main hosted image that everybody
+uses, you can also use the following scripts:
+Use the `image/push` or `image/build-and-push` scripts to build and push an
+update.
 
 ## FAQ
 #### How do I open Jupyter Notebook in my browser?
