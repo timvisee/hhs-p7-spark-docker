@@ -4,7 +4,7 @@ title Starting container...
 
 REM Script constants
 SET PROJECT_NAME=spark
-SET PROJECT_NOTEBOOK_DIR=.\notebook
+SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
 SET NOTEBOOK_URL="http://localhost:8888"
 
@@ -12,7 +12,7 @@ REM Header
 @echo Preparing to start container...
 
 REM Start the installation script if the directory doesn't exist
-IF NOT EXIST "%PROJECT_NOTEBOOK_DIR%" (
+IF NOT EXIST "%NOTEBOOK_DIR%" (
     @echo The notebook directory isn't available, starting installation...
     call install.bat
     @echo.
