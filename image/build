@@ -59,7 +59,7 @@ sudo docker build $DOCKER_IMAGE_TAGGED --pull .
 rc=$?
 if [[ $rc != 0 ]]; then
     # Log an error message
-    log "An error occurred while building the image!"
+    echo "An error occurred while building the image!"
 
     # Restore the IFS variable
     export IFS=$ORIGINAL_IFS
