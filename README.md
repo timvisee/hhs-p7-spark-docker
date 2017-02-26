@@ -1,3 +1,5 @@
+[![Build Status on Travis CI on master](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg?branch=master)](#automated-builds)
+
 # HHS P7 Spark in Docker
 This project allows you to get PySpark with Jupyter Notebook up and running
 with a single command!
@@ -76,16 +78,18 @@ The following scripts/commands are included in the project:
 To reopen Jupyter Notebook in the browser for a running container,
 simply execute the `./start` / `start.bat` script again.
 
-## Data directory
-The notebook directory is accessable at `./notebook` in the project repository
-when the container is run.
+## Builds
+### Automated builds
+The project is currently being built automatically using the CI services in the
+table below.
+Successful builds are automatically deployed, and will be used by the project.
 
-On Windows it is required to enable drive sharing in the Docker settings on the
-drive the repository and container is installed on. The notebook directory
-should be in the same location, but it might differ depending on the
-configuration.
+|Service|Branch|Build Status| |
+|---:|:---|:---:|:---|---|
+|Travis CI|master|[![Build status on Travis CI on master](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg?branch=master)](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|[View Status](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|
+|Travis CI|last commit|[![Build status on Travis CI for last commit](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg)](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|[View Status](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|
 
-## Build it yourself
+### Build it yourself
 First of all, it's not required to build anything yourself. Simply use the
 [start](#usage) script to get things up and running.
 Sometimes however, this is useful if you've manually made changes to the docker
@@ -99,6 +103,15 @@ If you've permission to push updates to the main hosted image that everybody
 uses, you can also use the following scripts:
 Use the `image/push` or `image/build-and-push` scripts to build and push an
 update.
+
+## Data directory
+The notebook directory is accessable at `./notebook` in the project repository
+when the container is run.
+
+On Windows it is required to enable drive sharing in the Docker settings on the
+drive the repository and container is installed on. The notebook directory
+should be in the same location, but it might differ depending on the
+configuration.
 
 ## FAQ
 #### How do I open Jupyter Notebook in my browser?
