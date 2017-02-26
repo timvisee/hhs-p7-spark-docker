@@ -3,7 +3,7 @@
 title Updating container...
 
 REM Header
-@echo Updating container scripts...
+@echo Starting update...
 
 REM Stop running containers
 call stop.bat
@@ -14,9 +14,9 @@ git fetch
 @echo Checking out latest version...
 git checkout origin/master
 
-echo "Running installation..."
+echo "Forcing installation for update..."
 call install.bat
 
 echo Use the 'start.bat' command to start the updated container.
-echo Update done.
+echo Update finished!
 
