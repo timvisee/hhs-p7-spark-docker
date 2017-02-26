@@ -232,7 +232,7 @@ fi
 echo
 
 # Move to the parent directory
-cd "$DIR/.."
+cd ..
 
 # Notify the user about docker
 if [ $UNINSTALL_CONTAINER == "yes" ] && [ $UNINSTALL_REPO == "yes" ]; then
