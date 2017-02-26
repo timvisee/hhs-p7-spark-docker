@@ -39,6 +39,12 @@ ORIGINAL_IFS=$IFS;
 # Get the first tag
 export IFS=":"
 for TAG in $IMAGE_TAGS; do
+    # Skip empty tags
+    if [ -z $TAG ]; then
+        continue
+    fi
+
+    # Set the primary tag
     IMAGE_TAG=$TAG
     break
 done
@@ -65,8 +71,8 @@ fi
 
 # Tag the build with the additional tags
 for TAG in $IMAGE_TAGS; do
-    # Skip the primary tag
-    if [ $TAG == $IMAGE_TAG ]; then
+    # Skip the primary tag and empty tags
+    if [ $TAG == $IMAGE_TAG ] || [ -z $TAG ]; then
         continue;
     fi
 
