@@ -8,21 +8,70 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Script constants
 NOTEBOOK_DIR="$DIR/notebook"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Check whether a command exists
+# $1: Command to check for
+command_exists() {
+    type "$1" &> /dev/null ;
+}
+
 # Header
-echo "Starting installation..."
+log_normal "Starting installation..."
 
 # Pull the docker image
-echo "Pulling container image..."
+log_info "Pulling container image..."
 sudo docker-compose -f "$DIR/docker-compose.yml" pull
 
 # Create the notebook directory
 if [ ! -d "$NOTEBOOK_DIR" ]; then
-    echo "Creating notebook directory..."
+    log_info "Creating notebook directory..."
     mkdir "$NOTEBOOK_DIR"
 
-    echo "Setting proper directory permissions..."
+    log_info "Setting proper directory permissions..."
     sudo chmod 777 "$NOTEBOOK_DIR"
 fi
 
-echo "Installation finished!"
+log_success "Installation finished!"
+echo
 
