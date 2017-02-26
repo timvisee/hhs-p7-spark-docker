@@ -70,11 +70,11 @@ if [ ! -d "$NOTEBOOK_DIR" ]; then
 fi
 
 # Start the docker container
-log_normal "Starting container using Docker..."
+log_info "Starting container using Docker..."
 sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # Get the URL of the running notebook instance
-log_normal "Waiting 2 seconds for Jupyter Notebook to start..."
+log_info "Waiting 2 seconds for Jupyter Notebook to start..."
 NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
 
 # Open Notebook in the default browser depending on the operating system
@@ -99,8 +99,8 @@ fi
 
 # Show the URL of the running notebook instance
 echo
-log_normal "Notebook is running at:"
-log_normal "$NOTEBOOK_URL"
+log_info "Notebook is running at:"
+log_info "$NOTEBOOK_URL"
 
 # Started successfully, show a status message
 echo
