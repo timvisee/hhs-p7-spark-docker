@@ -49,13 +49,14 @@ echo
 
 # Stop any running container
 ./stop
+echo
 
 # Configure what to uninstall
 if [ $CUSTOM == "yes" ]; then
     # Ask whether to remove user data
     echo "Would you like to uninstall your user data?"
     PS3="Choose your action: "
-    select ENTRY in "Yes" "No" "More information"
+    select ENTRY in "Yes" "No" "More information" "Quit"
     do
         case $ENTRY in
             "Yes")
@@ -75,6 +76,10 @@ if [ $CUSTOM == "yes" ]; then
                 echo "installed again when starting the container."
                 echo
                 ;;
+            "Quit")
+                exit
+                break
+                ;;
         esac
     done
     echo
@@ -82,7 +87,7 @@ if [ $CUSTOM == "yes" ]; then
     # Ask whether to remove the container image
     echo "Would you like to uninstall the container (~1.3GB)?"
     PS3="Choose your action: "
-    select ENTRY in "Yes" "No" "More information"
+    select ENTRY in "Yes" "No" "More information" "Quit"
     do
         case $ENTRY in
             "Yes")
@@ -102,6 +107,10 @@ if [ $CUSTOM == "yes" ]; then
                 echo "when starting the container."
                 echo
                 ;;
+            "Quit")
+                exit
+                break
+                ;;
         esac
     done
     echo
@@ -109,7 +118,7 @@ if [ $CUSTOM == "yes" ]; then
     # Ask whether to remove the repository
     echo "Would you like to uninstall the repository with all the scripts?"
     PS3="Choose your action: "
-    select ENTRY in "Yes" "No" "More information"
+    select ENTRY in "Yes" "No" "More information" "Quit"
     do
         case $ENTRY in
             "Yes")
@@ -127,6 +136,10 @@ if [ $CUSTOM == "yes" ]; then
                 echo "This includes all management scripts such as './start' and './stop'"
                 echo "The repository can be installed again from GitHub."
                 echo
+                ;;
+            "Quit")
+                exit
+                break
                 ;;
         esac
     done
