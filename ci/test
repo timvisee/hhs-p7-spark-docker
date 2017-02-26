@@ -11,7 +11,7 @@ CONTAINER_HOME="/root"
 # Disable opening Notebook in the browser if we're running on CI
 if [ "$CI" == "true" ]; then
     echo "Disabling browser opening for Notebook, we're building on CI."
-    export NOTEBOOK_OPEN_BROWSER="no"
+    export NOTEBOOK_OPEN_BROWSER="false"
 fi
 
 # Start the container

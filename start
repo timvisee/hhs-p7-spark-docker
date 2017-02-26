@@ -85,9 +85,9 @@ sleep 2s
 NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
 
 # Open Notebook in the default browser depending on the operating system
-if [ "$NOTEBOOK_OPEN_BROWSER" == "no" ]; then
+if [ "$NOTEBOOK_OPEN_BROWSER" == "false" ]; then
     log_info "Not opening Notebook in browser."
-    log_normal "Environment variable 'NOTEBOOK_OPEN_BROWSER' is set to 'no'."
+    log_normal "Environment variable 'NOTEBOOK_OPEN_BROWSER' is set to 'false'."
 
 elif [ $(uname) == "Linux" ]; then
     if command_exists xdg-open ; then
