@@ -20,3 +20,6 @@ script:
 
     # Build
     - ./ci/build
+
+    # Test
+    - ./ci/test
