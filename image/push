@@ -26,3 +26,6 @@ fi
 echo "Pushing the image..."
 sudo docker push "$DOCKER_IMAGE"
 
+# Show a success message
+echo "Image successfully pushed!"
+

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Script to test whether the project runs successfully
+
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Script constants
+CONTAINER_HOME="/root"
+
+# Start the container
+bash "$DIR/../start"
+
+# Test for errors
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "An error occurred while starting the container!"
+    exit $rc
+fi
+
+# Wait some time before testing
+echo "Waiting 5 seconds before testing..."
+sleep 5s
+
+# Fetch the Jupyter Notebook URL from the running instance
+NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
+
+# Make sure the URL isn't an empty string
+if [ -z $NOTEBOOK_URL ]; then
+    echo "Failed to get Jupyter Notebook URL!"
+    echo 1
+fi
+
+# Stop the container
+bash "$DIR/../stop"
+
+# Test for errors
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "An error occurred while stopping the container!"
+    exit $rc
+fi
+
