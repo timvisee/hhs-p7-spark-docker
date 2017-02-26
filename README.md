@@ -50,17 +50,26 @@ Follow these steps to get the container up and running.
     * Linux/OSX: `./start`
     * Windows: `start.bat`
 
+It's recommended to use the `./update-and-start` / `update-and-start.bat`
+script in the future to start the container. This will automatically fetch
+new updates when available.
+
 The installation is started automatically when starting for the first time.
 The download of the container image might take a long while as it's around
 1.3GBs in size.
 
 ## Commands
 The following commands/scripts are included in the project:
-* `./start` / `start.bat`: Start and install the container
-* `./update-and-start` / `update-and-start.bat`: Update, install and start the container
-* `./stop` / `stop.bat`: Stop running containers
-* `./install` / `install.bat`: Install the container
-* `./update` / `update.bat`: Update the container and scripts
+* `./start` / `start.bat`:
+  Start the container (invokes install if required)
+* `./update-and-start` / `update-and-start.bat`:
+  Update and start the contanier (invokes install if required)
+* `./stop` / `stop.bat`:
+  Stop running containers
+* `./install` / `install.bat`:
+  Install the container
+* `./update` / `update.bat`:
+  Update the container and all scripts
 
 To reopen Jupyter Notebook in the browser for a running container,
 simply execute the `./start` / `start.bat` command again.
