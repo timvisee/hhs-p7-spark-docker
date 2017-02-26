@@ -1,0 +1,19 @@
+# Travis CI configuration
+
+# Require sudo in docker builds
+sudo: required
+
+# Use the docker service
+services:
+    - docker
+
+# Call the build script
+after_success:
+    # Add the branch as tag, use 'latest' on master branch
+    - export IMAGE_TAGS=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+    # Add additional tags
+    - export IMAGE_TAGS="$IMAGE_TAGS:$COMMIT:$TAG"
+
+    # Build
+    - ./ci/build
