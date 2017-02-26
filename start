@@ -11,6 +11,55 @@ NOTEBOOK_DIR="$DIR/notebook"
 CONTAINER_HOME="/root"
 NOTEBOOK_URL="http://localhost:8888/"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
+}
+
 # Check whether a command exists
 # $1: Command to check for
 command_exists() {
@@ -18,50 +67,49 @@ command_exists() {
 }
 
 # Header
-echo "Preparing to start container..."
+log_info "Preparing to start container..."
 
 # Start the installation script if the notebook directory doesn't exist
 if [ ! -d "$NOTEBOOK_DIR" ]; then
-    echo "The notebook directory isn't available, starting installation..."
+    log_warning "The notebook directory isn't available, starting installation..."
     ./install
-    echo
 fi
 
 # Start the docker container
-echo "Starting container using Docker..."
+log_status "Starting container using Docker..."
 sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # Get the URL of the running notebook instance
-echo "Waiting 2 seconds for Jupyter Notebook to start..."
+log_status "Waiting 2 seconds for Jupyter Notebook to start..."
 NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
 
 # Open Notebook in the default browser depending on the operating system
 if [ $(uname) == "Linux" ]; then
     if command_exists xdg-open ; then
-	echo "Opening Notebook in your default browser..."
+        log_info "Opening Notebook in your default browser..."
         xdg-open "$NOTEBOOK_URL"
     elif command_exists firefox ; then
-	echo "Opening Notebook in Firefox..."
+        log_info "Opening Notebook in Firefox..."
         firefox "$NOTEBOOK_URL"
     else
-        echo "No suitable method found to automatically open Notebook."
+        log_warning "No suitable method found to automatically open Notebook."
     fi
 
 elif [ $(uname) == "Darwin" ]; then
-    echo "Opening Notebook in Safari..."
+    log_success "Opening Notebook in Safari..."
     open "$NOTEBOOK_URL"
 
 else
-    echo "Unable to automatically open Notebook, unknown platform."
+    log_warning "Unable to automatically open Notebook, unknown platform."
 fi
 
 # Show the URL of the running notebook instance
 echo
-echo "Notebook is running at:"
-echo "$NOTEBOOK_URL"
+log_info "Notebook is running at:"
+log_normal "$NOTEBOOK_URL"
 
 # Started successfully, show a status message
 echo
-echo "Use './stop' to stop the container."
-echo "Start succeeded!"
-
+log_info "Use './stop' to stop the container."
+log_success "Start succeeded!"
+echo

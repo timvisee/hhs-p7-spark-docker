@@ -5,9 +5,59 @@
 # Script constants
 PROJECT_NAME="spark"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
+}
+
 # Stop the docker container and detach
-echo "Stopping running Spark containers in Docker..."
+log_info "Stopping running Spark containers in Docker..."
 sudo docker-compose -p "$PROJECT_NAME" stop
-echo "All Spark containers have been stopped."
-echo "Use './start' to restart the container."
+log_info "Use './start' to restart the container."
+log_success "All Spark containers have been stopped."
+echo
 
