@@ -17,7 +17,7 @@ if [ -z $IMAGE_TAGS ]; then
 fi
 
 # Build the image
-bash "$DIR/image/build"
+bash "$DIR/../image/build"
 
 # Make sure the build succeeded
 rc=$?
@@ -36,7 +36,7 @@ elif [ -z "$DOCKER_PASS" ]; then
 fi
 
 # Push the build
-bash "$DIR/image/push"
+bash "$DIR/../image/push"
 
 # Make sure the push succeeded
 rc=$?
