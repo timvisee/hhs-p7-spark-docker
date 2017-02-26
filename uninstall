@@ -177,8 +177,10 @@ if [ $UNINSTALL_REPO == "yes" ]; then
 fi
 
 # Notify the user about docker
-echo "This project doesn't require docker anymore, thus it may be uninstalled."
-echo "This must be done manually."
+if [ $UNINSTALL_CONTAINER == "yes" ] && [ $UNINSTALL_REPO == "yes" ]; then
+    echo "This project doesn't require docker anymore, thus it may be uninstalled."
+    echo "This must be done manually."
+fi
 
 # We're done!
-echo "Uninstallation finished!
+echo "Uninstallation finished!"
