@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Make sure the IMAGE_TAGS environment variable is set
+if [ -z $IMAGE_TAGS ]; then
+    # Log a message
+    echo "Environment variable 'IMAGE_TAGS' not set!"
+    echo "Stopping CI build!"
+    echo
+    echo "This variable should contain the tag(s) to apply."
+    echo "Multiple tags can be entered separated by a ':' (without spaces)."
+
+    # Exit with a non-zero code
+    exit 1
+fi
+
+# Build the image
+bash "$DIR/image/build"
+
+# Make sure the build succeeded
+rc=$?
+if [[ $rc != 0 ]]; then
+    log "Image build failed!"
+    exit $rc
+fi
+
+# Make sure the proper environment variables are set
+if [ -z "$DOCKER_USER" ]; then
+    echo "Environment variable 'DOCKER_USER' not set, cancelling push."
+    exit 0
+elif [ -z "$DOCKER_PASS" ]; then
+    echo "Environment variable 'DOCKER_PASS' not set, cancelling push."
+    exit 0
+fi
+
+# Push the build
+bash "$DIR/image/push"
+
+# Make sure the push succeeded
+rc=$?
+if [[ $rc != 0 ]]; then
+    log "Image push failed!"
+    exit $rc
+fi
