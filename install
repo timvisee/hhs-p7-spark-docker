@@ -43,11 +43,18 @@ log_question() {
   printf "\e[0;33m[?] $1\e[0m\n"
 }
 
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
 # Log an info message.
 # $1: Message
 log_info() {
-  # Print an indented message in purple
-  printf "\e[0;35m    $1\e[0m\n"
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
 }
 
 # Check whether a command exists
@@ -57,18 +64,18 @@ command_exists() {
 }
 
 # Header
-log_normal "Starting installation..."
+log_info "Starting installation..."
 
 # Pull the docker image
-log_info "Pulling container image..."
+log_status "Pulling container image..."
 sudo docker-compose -f "$DIR/docker-compose.yml" pull
 
 # Create the notebook directory
 if [ ! -d "$NOTEBOOK_DIR" ]; then
-    log_info "Creating notebook directory..."
+    log_status "Creating notebook directory..."
     mkdir "$NOTEBOOK_DIR"
 
-    log_info "Setting proper directory permissions..."
+    log_status "Setting proper directory permissions..."
     sudo chmod 777 "$NOTEBOOK_DIR"
 fi
 

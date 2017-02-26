@@ -43,11 +43,18 @@ log_question() {
   printf "\e[0;33m[?] $1\e[0m\n"
 }
 
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
 # Log an info message.
 # $1: Message
 log_info() {
-  # Print an indented message in purple
-  printf "\e[0;35m    $1\e[0m\n"
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
 }
 
 # Check whether a command exists
@@ -57,21 +64,21 @@ command_exists() {
 }
 
 # Header
-log_normal "Starting update..."
+log_info "Starting update..."
 
 # Stop running containers
 ./stop
 
-log_info "Fetching new updates from repository..."
+log_status "Fetching new updates from repository..."
 git fetch
 
-log_info "Checking out latest version..."
+log_status "Checking out latest version..."
 git checkout origin/master
 
-log_info "Forcing intallation for update..."
+log_status "Forcing intallation for update..."
 ./install
 
 cd -
-log_normal "Use the './start' command to start the updated container."
+log_info "Use the './start' command to start the updated container."
 log_success "Update finished!"
 echo
