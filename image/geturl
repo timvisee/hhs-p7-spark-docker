@@ -1,7 +1,4 @@
 #!/bin/bash
 
-# Wait a little for Jupyter Notebook to start
-sleep 2s
-
 # Get and output the actual URL
 jupyter notebook list | tail -n 1 | sed 's/\ *//;s/\ ::.*//'

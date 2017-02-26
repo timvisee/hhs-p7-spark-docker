@@ -24,6 +24,7 @@ docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" up -d
 
 REM Get the URL of the running Juptyer Notebook instance
 @echo Waiting 2 seconds for Jupyter Notebook to start...
+@timeout /t 2 /nobreak
 docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
 SET /p NOTEBOOK_URL=<url.txt
 
