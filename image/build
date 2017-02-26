@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Elevate permissions
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+# Script constants
+DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
+DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
+
+# Header
+echo "Prepaing docker image build..."
+
+# Ask the user for a tag
+echo "Choose a tag for this build. Leave it empty to use 'latest'."
+read -p "Enter a build tag: " IMAGE_TAG
+
+# Use the default tag if nothing is entered
+if [ "$IMAGE_TAG" == "" ]; then
+    echo "No tag entered, using 'latest'."
+    IMAGE_TAG="latest"
+fi
+
+# Build the image name with the suffixed tag
+DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
+
+# Push the image
+echo "Building docker image with '$IMAGE_TAG' tag..."
+sudo docker build -t "$DOCKER_IMAGE_TAGGED" --pull .
+

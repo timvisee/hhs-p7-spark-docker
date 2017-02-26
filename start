@@ -81,6 +81,7 @@ sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" up -d
 
 # Get the URL of the running notebook instance
 log_status "Waiting 2 seconds for Jupyter Notebook to start..."
+sleep 2s
 NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
 
 # Open Notebook in the default browser depending on the operating system

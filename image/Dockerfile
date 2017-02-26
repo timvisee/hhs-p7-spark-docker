@@ -108,9 +108,9 @@ RUN rm -rf /var/cache/apk/* \
 EXPOSE 8888
 
 # Copy some required scripts
-COPY setup /root/setup
-COPY geturl /root/geturl
-COPY bootstrap /root/bootstrap
+COPY script/setup /root/setup
+COPY script/geturl /root/geturl
+COPY script/bootstrap /root/bootstrap
 
 # Copy some resources
 COPY res/assignments_v0.2.zip "/tmp/assignments_v0.2.zip"
