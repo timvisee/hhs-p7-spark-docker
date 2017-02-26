@@ -58,8 +58,8 @@ The installation is started automatically when starting for the first time.
 The download of the container image might take a long while as it's around
 1.3GBs in size.
 
-## Commands
-The following commands/scripts are included in the project:
+## Scripts and commands
+The following scripts/commands are included in the project:
 * `./start` / `start.bat`:
   Start the container (invokes install if required)
 * `./update-and-start` / `update-and-start.bat`:
@@ -72,7 +72,7 @@ The following commands/scripts are included in the project:
   Update the container and all scripts
 
 To reopen Jupyter Notebook in the browser for a running container,
-simply execute the `./start` / `start.bat` command again.
+simply execute the `./start` / `start.bat` script again.
 
 ## Data directory
 The notebook directory is accessable at `./notebook` in the project repository
@@ -89,6 +89,13 @@ Jupyter Notebook should automatically open in your browser when you start the
 container.
 If the container is already running, simply run `./start` / `start.bat` again
 to re-open Jupyer Notebook.
+
+#### How do I get updates?
+New updates will automatically be installed if available when running the
+`./update` / `update.bat` script. It's recommended to use the
+`./update-and-start` / `update-and-start.bat` scripts to start the container
+in the future, as this automatically installs any available updates when
+avaialable before the container is starting.
 
 #### Do I need to enable VT-x / virtualization?
 Yes, virtualization must be enabled to use this container.
