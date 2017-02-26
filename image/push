@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Elevate permissions
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+# Script constants
+DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
+
+# Make sure any image exists that can be pushed
+if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
+    echo "There's no image build available that can be pushed."
+    echo "Use the './build' or './build-and-push' script to build the image."
+    exit
+fi
+
+# Log in with docker
+echo "Requesting docker login..."
+sudo docker login
+
+# Push the image
+echo "Pushing the image..."
+sudo docker push "$DOCKER_IMAGE"
+

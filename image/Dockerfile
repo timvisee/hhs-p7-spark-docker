@@ -41,12 +41,6 @@ RUN cd /tmp \
  && rm miniconda.sh \
  && $CONDA_DIR/bin/conda install --yes conda==$MINICONDA_VER
 
-# Configure Java
-ENV JAVA_VERSION_MAJOR 8
-ENV JAVA_VERSION_MINOR 45
-ENV JAVA_VERSION_BUILD 14
-ENV JAVA_PACKAGE jdk
-
 # Download and unarchive Java
 RUN curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie"\
   http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${JAVA_PACKAGE}-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz \
