@@ -7,8 +7,11 @@ sudo: required
 services:
     - docker
 
+# Skip installation steps
+install: true
+
 # Call the build script
-after_success:
+script:
     # Add the branch as tag, use 'latest' on master branch
     - export IMAGE_TAGS=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
