@@ -8,8 +8,11 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Script constants
 CONTAINER_HOME="/root"
 
-# Disable opening Notebook in the browser
-export NOTEBOOK_OPEN_BROWSER="no"
+# Disable opening Notebook in the browser if we're running on CI
+if [ "$CI" == "true" ]; then
+    echo "Disabling browser opening for Notebook, we're building on CI."
+    export NOTEBOOK_OPEN_BROWSER="no"
+fi
 
 # Start the container
 bash "$DIR/../start"
