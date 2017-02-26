@@ -70,6 +70,8 @@ The following scripts/commands are included in the project:
   Install the container
 * `./update` / `update.bat`:
   Update the container and all scripts
+* `./uninstall` / `uninstall.bat`:
+  Uninstall the container and it's resources
 
 To reopen Jupyter Notebook in the browser for a running container,
 simply execute the `./start` / `start.bat` script again.

@@ -1,0 +1,171 @@
+#!/bin/bash
+
+# Elevate permissions
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Script constants
+PROJECT_NAME="spark"
+NOTEBOOK_DIR="$DIR/notebook"
+DOCKER_IMAGE="timvisee/hhs-p7-spark-docker:latest"
+
+# Header
+echo "Uninstallation script."
+echo
+echo "Repository directory: $DIR"
+echo
+
+# Actions
+CUSTOM="yes"
+UNINSTALL_CONTAINER="yes"
+UNINSTALL_USER_DATA="yes"
+UNINSTALL_REPO="yes"
+
+# Confirm the user wan't to uninstall
+echo "You're about to uninstall the container and all it's data."
+echo "Are you sure you want to continue?"
+PS3="Choose your action: "
+select ENTRY in "Yes, uninstall custom" "Yes, uninstall everything" "No, quit!"
+do
+    case $ENTRY in
+        "Yes, uninstall custom")
+            CUSTOM=yes
+            break
+            ;;
+        "Yes, uninstall everything")
+            CUSTOM=no
+            break
+            ;;
+        "No, quit!")
+            echo "Quitting uninstallation."
+            exit
+            break
+            ;;
+    esac
+done
+echo
+
+# Stop any running container
+./stop
+
+# Configure what to uninstall
+if [ $CUSTOM == "yes" ]; then
+    # Ask whether to remove user data
+    echo "Would you like to uninstall your user data?"
+    PS3="Choose your action: "
+    select ENTRY in "Yes" "No" "More information"
+    do
+        case $ENTRY in
+            "Yes")
+                UNINSTALL_USER_DATA=yes
+                break
+                ;;
+            "No")
+                UNINSTALL_USER_DATA=no
+                break
+                ;;
+            "More information")
+                echo
+                echo "User data information:"
+                echo "This option will uninstall all files in Notebook."
+                echo "It will remove the assessments, tutorials and your own data."
+                echo "The assesments and tutorials will be automatically"
+                echo "installed again when starting the container."
+                echo
+                ;;
+        esac
+    done
+    echo
+
+    # Ask whether to remove the container image
+    echo "Would you like to uninstall the container (~1.3GB)?"
+    PS3="Choose your action: "
+    select ENTRY in "Yes" "No" "More information"
+    do
+        case $ENTRY in
+            "Yes")
+                UNINSTALL_CONTAINER=yes
+                break
+                ;;
+            "No")
+                UNINSTALL_CONTAINER=no
+                break
+                ;;
+            "More information")
+                echo
+                echo "Container information:"
+                echo "This option will remove and uninstall the container."
+                echo "Uninstalling this will free about 1.3GB of disk space."
+                echo "These files will automatically be downloaded again"
+                echo "when starting the container."
+                echo
+                ;;
+        esac
+    done
+    echo
+
+    # Ask whether to remove the repository
+    echo "Would you like to uninstall the repository with all the scripts?"
+    PS3="Choose your action: "
+    select ENTRY in "Yes" "No" "More information"
+    do
+        case $ENTRY in
+            "Yes")
+                UNINSTALL_REPO=yes
+                break
+                ;;
+            "No")
+                UNINSTALL_REPO=no
+                break
+                ;;
+            "More information")
+                echo
+                echo "Repository information:"
+                echo "This option will remove the repository with all scripts."
+                echo "This includes all management scripts such as './start' and './stop'"
+                echo "The repository can be installed again from GitHub."
+                echo
+                ;;
+        esac
+    done
+    echo
+fi
+
+echo "Starting uninstallation."
+echo
+
+# Uninstall user data
+if [ $UNINSTALL_USER_DATA == "yes" ]; then
+    echo "Uninstalling user data..."
+    sudo rm -rf "$NOTEBOOK_DIR"
+    echo "User data uninstalled!"
+    echo
+fi
+
+# Uninstall the container
+if [ $UNINSTALL_CONTAINER == "yes" ]; then
+    echo "Uninstalling container..."
+    sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" rm
+    if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
+        sudo docker rmi "$DOCKER_IMAGE"
+    fi
+    echo "Container uninstalled!"
+    echo
+fi
+
+# Uninstall the repository
+if [ $UNINSTALL_REPO == "yes" ]; then
+    echo "Uninstalling repository..."
+    sudo rm -rf $DIR
+    echo "Repository uninstalled!"
+    echo
+fi
+
+# Notify the user about docker
+echo "This project doesn't require docker anymore, thus it may be uninstalled."
+echo "This must be done manually."
+
+# We're done!
+echo "Uninstallation finished!
