@@ -35,6 +35,9 @@ if [ -z "$IMAGE_TAGS" ]; then
     IMAGE_TAGS="latest"
 fi
 
+# Output the tags used to build
+echo "Building with tags: $IMAGE_TAGS"
+
 # Store the original IFS variable
 ORIGINAL_IFS=$IFS;
 
@@ -76,15 +79,18 @@ if [[ $rc != 0 ]]; then
 fi
 
 # Tag the build with the additional tags
+echo "Adding tags..."
+export IFS=":"
 for TAG in $IMAGE_TAGS; do
     # Skip the primary tag and empty tags
     if [ "$TAG" == "$IMAGE_TAG" ] || [ -z $TAG ]; then
+        echo "Tag '$TAG' is already applied."
         continue;
     fi
 
     # Add the current tag
     echo "Adding '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image..."
-   #sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
+    sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
 done
 
 # Restore the IFS variable
