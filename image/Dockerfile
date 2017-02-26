@@ -35,7 +35,7 @@ ENV MINICONDA_MD5_SUM d0c7c71cc5659e54ab51f2005a8d96f3
 # Install Miniconda
 RUN cd /tmp \
  && mkdir -p $CONDA_DIR \
- && wget $MINICONDA_URL -O miniconda.sh \
+ && curl -o miniconda.sh $MINICONDA_URL \
  && echo "$MINICONDA_MD5_SUM  miniconda.sh" | md5sum -c - \
  && sudo bash miniconda.sh -f -b -p $CONDA_DIR \
  && rm miniconda.sh \
@@ -48,7 +48,7 @@ ENV JAVA_VERSION_BUILD 14
 ENV JAVA_PACKAGE jdk
 
 # Download and unarchive Java
-RUN curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie"\
+RUN curl -jkSLH "Cookie: oraclelicense=accept-securebackup-cookie"\
   http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${JAVA_PACKAGE}-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz \
     | tar -xzf - -C /opt &&\
     ln -s /opt/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk &&\
@@ -87,7 +87,7 @@ ENV SPARK_MD5_SUM 43aa7c28b9670e65cb4f395000838860
 
 # Download and install Spark
 RUN cd /tmp \
- && wget $SPARK_URL -O spark.tgz \
+ && curl -o spark.tgz $SPARK_URL \
  && echo "$SPARK_MD5_SUM  spark.tgz" | md5sum -c - \
  && tar xzvf spark.tgz \
  && mv $SPARK_PACKAGE_NAME/ spark \

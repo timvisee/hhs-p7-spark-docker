@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# Script to test whether the project runs successfully
+
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Script constants
+CONTAINER_HOME="/root"
+
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
+}
+
+# Header
+log_info "Container test script."
+
+# Disable opening Notebook in the browser if we're running on CI
+if [ "$CI" == "true" ]; then
+    log_info "Disabling browser opening for Notebook, we're building on CI."
+    export NOTEBOOK_OPEN_BROWSER="false"
+fi
+
+# Start the container
+bash "$DIR/../start"
+
+# Test for errors
+rc=$?
+if [[ $rc != 0 ]]; then
+    log_error "An error occurred while starting the container!"
+    exit $rc
+fi
+
+# Wait some time before testing
+log_status "Waiting 5 seconds before testing..."
+sleep 5s
+
+# Fetch the Jupyter Notebook URL from the running instance
+NOTEBOOK_URL="$(sudo docker exec -i -t spark_spark_1 "$CONTAINER_HOME/geturl")"
+
+# Make sure the URL isn't an empty string
+if [ -z $NOTEBOOK_URL ]; then
+    log_error "Failed to get Jupyter Notebook URL!"
+    echo 1
+fi
+
+# Show an URL success message
+log_info "Successfully got a Jupyter Notebook URL, Notebook is started!"
+log_normal "URL: $NOTEBOOK_URL"
+
+# Stop the container
+bash "$DIR/../stop"
+
+# Test for errors
+rc=$?
+if [[ $rc != 0 ]]; then
+    log_error "An error occurred while stopping the container!"
+    exit $rc
+fi
+
+# Success
+log_success "Successfully tested!"
