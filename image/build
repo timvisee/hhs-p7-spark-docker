@@ -17,26 +17,75 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
+}
+
 # Header
-echo "Prepaing docker image build..."
+log_info "Prepaing docker image build..."
 
 # Ask the user for a tag
 if [ -z $IMAGE_TAGS ]; then
     echo
-    echo "Choose image tag(s) for this build."
-    echo "Use multiple tags separated with a ':' (no spaces)."
-    echo "Leave it empty to use 'latest' as default."
+    log_question "Choose image tag(s) for this build."
+    log_normal "Use multiple tags separated with a ':' (no spaces)."
+    log_normal "Leave it empty to use 'latest' as default."
     read -p "Enter build tag(s): " IMAGE_TAGS
 fi
 
 # Use the default tag if nothing is entered
 if [ -z "$IMAGE_TAGS" ]; then
-    echo "No tag entered, using 'latest'."
+    log_info "No tag entered, using 'latest'."
     IMAGE_TAGS="latest"
 fi
 
 # Output the tags used to build
-echo "Building with tags: $IMAGE_TAGS"
+log_status "Building with tags: $IMAGE_TAGS"
 
 # Store the original IFS variable
 ORIGINAL_IFS=$IFS;
@@ -58,18 +107,18 @@ done
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
 
 # Change into the Dockerfile directory
-echo "Changing into Dockerfile directory..."
+log_status "Changing into Dockerfile directory..."
 cd "$DIR"
 
 # Build the image
-echo "Building docker image with '$IMAGE_TAG' tag..."
+log_info "Building docker image with '$IMAGE_TAG' tag..."
 sudo docker build -t "$DOCKER_IMAGE_TAGGED" --pull .
 
 # Make sure the build succeeded
 rc=$?
 if [[ $rc != 0 ]]; then
     # Log an error message
-    echo "An error occurred while building the image!"
+    log_error "An error occurred while building the image!"
 
     # Restore the IFS variable
     export IFS=$ORIGINAL_IFS
@@ -79,7 +128,7 @@ if [[ $rc != 0 ]]; then
 fi
 
 # Tag the build with the additional tags
-echo "Adding tags..."
+log_normal "Adding tags..."
 export IFS=":"
 for TAG in $IMAGE_TAGS; do
     # Skip empty tags
@@ -89,14 +138,17 @@ for TAG in $IMAGE_TAGS; do
 
     # Skip the primary tag
     if [ "$TAG" == "$IMAGE_TAG" ]; then
-        echo "Tag '$TAG' is already applied."
+        log_status "Tag '$TAG' is already applied."
         continue;
     fi
 
     # Add the current tag
-    echo "Adding '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image..."
     sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
+    log_success "Added '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image."
 done
 
 # Restore the IFS variable
 export IFS=$ORIGINAL_IFS
+
+# Show a success message
+log_success "Docker image build succesful!"

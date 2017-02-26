@@ -6,26 +6,75 @@
 # Script constants
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an status message.
+# $1: Message
+log_status() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in orange
+  printf "\e[0;33m[i] $1\e[0m\n"
+}
+
 # Make sure any image exists that can be pushed
 if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
-    echo "There's no image build available that can be pushed."
-    echo "Use the './build' or './build-and-push' script to build the image."
+    log_warning "There's no image build available that can be pushed."
+    log_info "Use the './build' or './build-and-push' script to build the image."
     exit
 fi
 
 # Log in with docker
 if [ -n "$DOCKER_USER" ] && [ -n "$DOCKER_PASS" ]; then
-    echo "Automatically logging into Docker..."
+    log_info "Automatically logging into Docker..."
     sudo docker login -u $DOCKER_USER -p $DOCKER_PASS
 else
-    echo "Requesting docker login..."
+    log_info "Requesting docker login..."
     sudo docker login
 fi
 
 # Push the image
-echo "Pushing the image..."
+log_info "Pushing the image..."
 sudo docker push "$DOCKER_IMAGE"
 
 # Show a success message
-echo "Image successfully pushed!"
+log_success "Image successfully pushed!"
 
