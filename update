@@ -2,7 +2,7 @@
 
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
-# Get the current path
+# Change to the path this script is located at
 cd "`dirname \"$0\"`"
 
 # Header
@@ -11,12 +11,16 @@ echo "Updating container scripts..."
 # Stop running containers
 ./stop
 
-echo "Fetching new updates..."
+echo "Fetching new updates from repository..."
 git fetch
 
 echo "Checking out latest version..."
 git checkout origin/master
 
+echo "Running installation..."
+./install
+
 cd -
+echo "Use the './start' command to start the updated container."
 echo "Update done."
 
