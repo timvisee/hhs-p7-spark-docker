@@ -81,7 +81,8 @@ simply execute the `./start` / `start.bat` script again.
 ## Builds
 ### Automated builds
 For each commit, a build and test is automatically started using a CI service.
-Successful builds are automatically deployed, and will be used by the project.
+Successful builds are automatically deployed, and will be used by everybody
+using this project with these management scripts.
 
 |Service|Branch|Build Status| |
 |---:|:---|:---:|:---|---|
