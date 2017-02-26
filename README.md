@@ -57,6 +57,7 @@ The download of the container image might take a long while as it's around
 ## Commands
 The following commands/scripts are included in the project:
 * `./start` / `start.bat`: Start and install the container
+* `./update-and-start` / `update-and-start.bat`: Update, install and start the container
 * `./stop` / `stop.bat`: Stop running containers
 * `./install` / `install.bat`: Install the container
 * `./update` / `update.bat`: Update the container and scripts

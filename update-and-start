@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+# Run the update and start script
+./update
+./start
