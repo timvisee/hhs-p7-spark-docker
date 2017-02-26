@@ -1,31 +1,73 @@
 #!/bin/bash
 
+# Script to build the docker image with the current Dockerfile.
+# 
+# Environment variables:
+# $IMAGE_TAGS: [optional] List of tags to apply to the image,
+#              separated by a ':' (without spaces). Setting this
+#              variable will skip asking the user to enter a tag.
+
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # Script constants
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
+IMAGE_TAGS=""
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
 
 # Header
 echo "Prepaing docker image build..."
 
 # Ask the user for a tag
-if [ -z $IMAGE_TAG ]; then
-    echo "Choose a tag for this build. Leave it empty to use 'latest'."
-    read -p "Enter a build tag: " IMAGE_TAG
+if [ -z $IMAGE_TAGS ]; then
+    echo
+    echo "Choose a tag(s) for this build."
+    echo "Use multiple tags separated with a ':' (no spaces)."
+    echo "Leave it empty to use 'latest' as default."
+    read -p "Enter build tag(s): " IMAGE_TAGS
 fi
 
 # Use the default tag if nothing is entered
 if [ -z "$IMAGE_TAG" ]; then
     echo "No tag entered, using 'latest'."
-    IMAGE_TAG="latest"
+    IMAGE_TAGS="latest"
 fi
+
+# Store the original IFS variable
+ORIGINAL_IFS=$IFS;
+
+# Get the first tag
+export IFS=";"
+for TAG in $IMAGE_TAGS; do
+    IMAGE_TAG=$TAG
+    break
+done
 
 # Build the image name with the suffixed tag
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
 
-# Push the image
+# Build the image
 echo "Building docker image with '$IMAGE_TAG' tag..."
-sudo docker build -t "$DOCKER_IMAGE_TAGGED" --pull .
+sudo docker build $DOCKER_IMAGE_TAGGED --pull .
 
+# Make sure the build succeeded
+rc=$?
+if [[ $rc != 0 ]]; then
+    log "An error occurred while building the image!"
+    exit $rc
+fi
+
+# Tag the build with the additional tags
+for TAG in $IMAGE_TAGS; do
+    # Skip the primary tag
+    if [ $TAG == $IMAGE_TAG ]; then
+        continue;
+    fi
+
+    # Add the current tag
+    echo "Adding '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image..."
+    sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
+done
+
+# Restore the IFS variable
+export IFS=$ORIGINAL_IFS
