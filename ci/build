@@ -22,7 +22,7 @@ bash "$DIR/../image/build"
 # Make sure the build succeeded
 rc=$?
 if [[ $rc != 0 ]]; then
-    log "Image build failed!"
+    echo "Image build failed!"
     exit $rc
 fi
 
@@ -41,6 +41,6 @@ bash "$DIR/../image/push"
 # Make sure the push succeeded
 rc=$?
 if [[ $rc != 0 ]]; then
-    log "Image push failed!"
+    echo "Image push failed!"
     exit $rc
 fi
