@@ -1,4 +1,6 @@
 [![Build Status on Travis CI on master](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg?branch=master)](#automated-builds)
+[![Docker Hub pulls](https://img.shields.io/docker/pullsd/timvisee/hhs-p7-spark-docker.svg)](https://hub.docker.com/r/timvisee/hhs-p7-spark-docker/)
+[![Docker Hub stars](https://img.shields.io/docker/stars/timvisee/hhs-p7-spark-docker.svg)](https://hub.docker.com/r/timvisee/hhs-p7-spark-docker/)
 
 # HHS P7 Spark in Docker
 This project allows you to get PySpark with Jupyter Notebook up and running
