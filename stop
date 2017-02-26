@@ -50,8 +50,7 @@ log_info() {
 # Stop the docker container and detach
 log_info "Stopping running Spark containers in Docker..."
 sudo docker-compose -p "$PROJECT_NAME" stop
-log_success "All Spark containers have been stopped."
-echo
 log_normal "Use './start' to restart the container."
+log_success "All Spark containers have been stopped."
 echo
 
