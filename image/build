@@ -28,7 +28,7 @@ if [ -z $IMAGE_TAGS ]; then
 fi
 
 # Use the default tag if nothing is entered
-if [ -z "$IMAGE_TAG" ]; then
+if [ -z "$IMAGE_TAGS" ]; then
     echo "No tag entered, using 'latest'."
     IMAGE_TAGS="latest"
 fi
@@ -37,7 +37,7 @@ fi
 ORIGINAL_IFS=$IFS;
 
 # Get the first tag
-export IFS=";"
+export IFS=":"
 for TAG in $IMAGE_TAGS; do
     IMAGE_TAG=$TAG
     break
@@ -48,12 +48,18 @@ DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
 
 # Build the image
 echo "Building docker image with '$IMAGE_TAG' tag..."
-sudo docker build $DOCKER_IMAGE_TAGGED --pull .
+# sudo docker build $DOCKER_IMAGE_TAGGED --pull .
 
 # Make sure the build succeeded
 rc=$?
 if [[ $rc != 0 ]]; then
+    # Log an error message
     log "An error occurred while building the image!"
+
+    # Restore the IFS variable
+    export IFS=$ORIGINAL_IFS
+
+    # Exit with the code
     exit $rc
 fi
 
@@ -66,7 +72,7 @@ for TAG in $IMAGE_TAGS; do
 
     # Add the current tag
     echo "Adding '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image..."
-    sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
+    #sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
 done
 
 # Restore the IFS variable
