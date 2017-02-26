@@ -10,6 +10,9 @@
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Script constants
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
@@ -20,7 +23,7 @@ echo "Prepaing docker image build..."
 # Ask the user for a tag
 if [ -z $IMAGE_TAGS ]; then
     echo
-    echo "Choose a tag(s) for this build."
+    echo "Choose image tag(s) for this build."
     echo "Use multiple tags separated with a ':' (no spaces)."
     echo "Leave it empty to use 'latest' as default."
     read -p "Enter build tag(s): " IMAGE_TAGS
@@ -50,6 +53,10 @@ done
 
 # Build the image name with the suffixed tag
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
+
+# Change into the Dockerfile directory
+echo "Changing into Dockerfile directory..."
+cd "$DIR"
 
 # Build the image
 echo "Building docker image with '$IMAGE_TAG' tag..."
