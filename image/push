@@ -14,8 +14,13 @@ if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
 fi
 
 # Log in with docker
-echo "Requesting docker login..."
-sudo docker login
+if [ -n "$DOCKER_USER" ] && [ -n "$DOCKER_PASS" ]; then
+    echo "Automatically logging into Docker..."
+    sudo docker login -u $DOCKER_USER -p $DOCKER_PASS
+else
+    echo "Requesting docker login..."
+    sudo docker login
+fi
 
 # Push the image
 echo "Pushing the image..."
