@@ -69,11 +69,11 @@ log_info "Starting update..."
 # Stop running containers
 ./stop
 
-log_status "Fetching new updates from repository..."
+log_status "Fetching changes from the repository..."
 git fetch
 
-log_status "Checking out latest version..."
-git checkout origin/master
+log_status "Pulling all changes..."
+git pull
 
 log_status "Forcing intallation for update..."
 ./install

@@ -8,11 +8,11 @@ REM Header
 REM Stop running containers
 call stop.bat
 
-@echo Fetching new updates from repository...
+@echo Fetching changes from the repository...
 git fetch
 
-@echo Checking out latest version...
-git checkout origin/master
+@echo Pulling all changes...
+git pull
 
 echo "Forcing installation for update..."
 call install.bat
