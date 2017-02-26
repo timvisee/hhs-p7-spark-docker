@@ -11,10 +11,58 @@ PROJECT_NAME="spark"
 NOTEBOOK_DIR="$DIR/notebook"
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker:latest"
 
+# Log a normal message.
+# $1: Message.
+log_normal() {
+  # Print a message in orange
+  printf "\e[0;33m    $1\e[0m\n"
+}
+
+# Log a success message.
+# $1: Message.
+log_success() {
+  # Print a message in green with a checkmark
+  printf "\e[0;32m[✔] $1\e[0m\n"
+}
+
+# Log a warning message.
+# $1: Message.
+log_warning() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[!] $1 $2\e[0m\n"
+}
+
+# Log an error message.
+# $1: Message.
+log_error() {
+  # Print a message in red with a cross
+  printf "\e[0;31m[✖] $1 $2\e[0m\n"
+}
+
+# Log a question message.
+# $1: Message.
+log_question() {
+  # Print a message in orange with a question mark
+  printf "\e[0;33m[?] $1\e[0m\n"
+}
+
+# Log an info message.
+# $1: Message
+log_info() {
+  # Print an indented message in purple
+  printf "\e[0;35m    $1\e[0m\n"
+}
+
+# Check whether a command exists
+# $1: Command to check for
+command_exists() {
+    type "$1" &> /dev/null ;
+}
+
 # Header
-echo "Uninstallation script."
+log_normal "Uninstallation script."
 echo
-echo "Repository directory: $DIR"
+log_info "Repository directory: $DIR"
 echo
 
 # Actions
@@ -24,8 +72,8 @@ UNINSTALL_USER_DATA="yes"
 UNINSTALL_REPO="yes"
 
 # Confirm the user wan't to uninstall
-echo "You're about to uninstall the container and all it's data."
-echo "Are you sure you want to continue?"
+log_question "You're about to uninstall the container and all it's data."
+log_question "Are you sure you want to continue?"
 PS3="Choose your action: "
 select ENTRY in "Yes, uninstall custom" "Yes, uninstall everything" "No, quit!"
 do
@@ -39,7 +87,7 @@ do
             break
             ;;
         "No, quit!")
-            echo "Quitting uninstallation."
+            log_success "Quitting uninstallation."
             exit
             break
             ;;
@@ -49,12 +97,11 @@ echo
 
 # Stop any running container
 ./stop
-echo
 
 # Configure what to uninstall
 if [ $CUSTOM == "yes" ]; then
     # Ask whether to remove user data
-    echo "Would you like to uninstall your user data?"
+    log_question "Would you like to uninstall your user data?"
     PS3="Choose your action: "
     select ENTRY in "Yes" "No" "More information" "Quit"
     do
@@ -69,14 +116,15 @@ if [ $CUSTOM == "yes" ]; then
                 ;;
             "More information")
                 echo
-                echo "User data information:"
-                echo "This option will uninstall all files in Notebook."
-                echo "It will remove the assessments, tutorials and your own data."
-                echo "The assesments and tutorials will be automatically"
-                echo "installed again when starting the container."
+                log_normal "User data information:"
+                log_normal "This option will uninstall all files in Notebook."
+                log_normal "It will remove the assessments, tutorials and your own data."
+                log_normal "The assesments and tutorials will be automatically"
+                log_normal "installed again when starting the container."
                 echo
                 ;;
             "Quit")
+                log_success "Quitting uninstallation."
                 exit
                 break
                 ;;
@@ -85,7 +133,7 @@ if [ $CUSTOM == "yes" ]; then
     echo
 
     # Ask whether to remove the container image
-    echo "Would you like to uninstall the container (~1.3GB)?"
+    log_question "Would you like to uninstall the container (~1.3GB)?"
     PS3="Choose your action: "
     select ENTRY in "Yes" "No" "More information" "Quit"
     do
@@ -100,14 +148,15 @@ if [ $CUSTOM == "yes" ]; then
                 ;;
             "More information")
                 echo
-                echo "Container information:"
-                echo "This option will remove and uninstall the container."
-                echo "Uninstalling this will free about 1.3GB of disk space."
-                echo "These files will automatically be downloaded again"
-                echo "when starting the container."
+                log_normal "Container information:"
+                log_normal "This option will remove and uninstall the container."
+                log_normal "Uninstalling this will free about 1.3GB of disk space."
+                log_normal "These files will automatically be downloaded again"
+                log_normal "when starting the container."
                 echo
                 ;;
             "Quit")
+                log_success "Quitting uninstallation."
                 exit
                 break
                 ;;
@@ -116,7 +165,7 @@ if [ $CUSTOM == "yes" ]; then
     echo
 
     # Ask whether to remove the repository
-    echo "Would you like to uninstall the repository with all the scripts?"
+    log_question "Would you like to uninstall the repository with all the scripts?"
     PS3="Choose your action: "
     select ENTRY in "Yes" "No" "More information" "Quit"
     do
@@ -131,13 +180,14 @@ if [ $CUSTOM == "yes" ]; then
                 ;;
             "More information")
                 echo
-                echo "Repository information:"
-                echo "This option will remove the repository with all scripts."
-                echo "This includes all management scripts such as './start' and './stop'"
-                echo "The repository can be installed again from GitHub."
+                log_normal "Repository information:"
+                log_normal "This option will remove the repository with all scripts."
+                log_normal "This includes all management scripts such as './start' and './stop'"
+                log_normal "The repository can be installed again from GitHub."
                 echo
                 ;;
             "Quit")
+                log_success "Quitting uninstallation."
                 exit
                 break
                 ;;
@@ -146,41 +196,42 @@ if [ $CUSTOM == "yes" ]; then
     echo
 fi
 
-echo "Starting uninstallation."
+log_normal "Starting uninstallation."
 echo
 
 # Uninstall user data
 if [ $UNINSTALL_USER_DATA == "yes" ]; then
-    echo "Uninstalling user data..."
+    log_normal "Uninstalling user data..."
     sudo rm -rf "$NOTEBOOK_DIR"
-    echo "User data uninstalled!"
+    log_success "User data uninstalled!"
     echo
 fi
 
 # Uninstall the container
 if [ $UNINSTALL_CONTAINER == "yes" ]; then
-    echo "Uninstalling container..."
+    log_normal "Uninstalling container..."
     sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" rm
     if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
         sudo docker rmi "$DOCKER_IMAGE"
     fi
-    echo "Container uninstalled!"
+    log_success "Container uninstalled!"
     echo
 fi
 
 # Uninstall the repository
 if [ $UNINSTALL_REPO == "yes" ]; then
-    echo "Uninstalling repository..."
+    log_normal "Uninstalling repository..."
     sudo rm -rf $DIR
-    echo "Repository uninstalled!"
+    log_success "Repository uninstalled!"
     echo
 fi
 
 # Notify the user about docker
 if [ $UNINSTALL_CONTAINER == "yes" ] && [ $UNINSTALL_REPO == "yes" ]; then
-    echo "This project doesn't require docker anymore, thus it may be uninstalled."
-    echo "This must be done manually."
+    log_normal "This project doesn't require docker anymore, thus it may be uninstalled."
+    log_normal "This must be done manually."
 fi
 
 # We're done!
-echo "Uninstallation finished!"
+log_success "Uninstallation finished!"
+echo
