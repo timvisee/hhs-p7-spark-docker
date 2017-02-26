@@ -53,7 +53,7 @@ DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE:$IMAGE_TAG"
 
 # Build the image
 echo "Building docker image with '$IMAGE_TAG' tag..."
-# sudo docker build $DOCKER_IMAGE_TAGGED --pull .
+sudo docker build $DOCKER_IMAGE_TAGGED --pull .
 
 # Make sure the build succeeded
 rc=$?
@@ -71,13 +71,13 @@ fi
 # Tag the build with the additional tags
 for TAG in $IMAGE_TAGS; do
     # Skip the primary tag and empty tags
-    if [ $TAG == $IMAGE_TAG ] || [ -z $TAG ]; then
+    if [ "$TAG" == "$IMAGE_TAG" ] || [ -z $TAG ]; then
         continue;
     fi
 
     # Add the current tag
     echo "Adding '$TAG' tag to '$DOCKER_IMAGE_TAGGED' image..."
-    #sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
+   #sudo docker tag "$DOCKER_IMAGE_TAGGED" "$DOCKER_IMAGE:$TAG"
 done
 
 # Restore the IFS variable
