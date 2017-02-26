@@ -34,6 +34,10 @@ if [ -z $NOTEBOOK_URL ]; then
     echo 1
 fi
 
+# Show an URL success message
+echo "Successfully got a Jupyter Notebook URL, Notebook is started!"
+echo "URL: $NOTEBOOK_URL"
+
 # Stop the container
 bash "$DIR/../stop"
 
