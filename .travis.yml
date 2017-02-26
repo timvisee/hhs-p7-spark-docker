@@ -16,7 +16,7 @@ script:
     - export IMAGE_TAGS=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
     # Add additional tags
-    - export IMAGE_TAGS="$IMAGE_TAGS:$COMMIT:$TAG"
+    - export IMAGE_TAGS="$IMAGE_TAGS:$TRAVIS_COMMIT:$TRAVIS_TAG"
 
     # Build
     - ./ci/build
