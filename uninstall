@@ -215,7 +215,7 @@ fi
 # Uninstall the container
 if [ $UNINSTALL_CONTAINER == "yes" ]; then
     log_status "Uninstalling container..."
-    sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" rm
+    sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" rm -f
     if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
         sudo docker rmi "$DOCKER_IMAGE"
     fi
@@ -229,6 +229,9 @@ if [ $UNINSTALL_REPO == "yes" ]; then
     log_success "Repository uninstalled!"
 fi
 echo
+
+# Move to the parent directory
+cd "$DIR/.."
 
 # Notify the user about docker
 if [ $UNINSTALL_CONTAINER == "yes" ] && [ $UNINSTALL_REPO == "yes" ]; then

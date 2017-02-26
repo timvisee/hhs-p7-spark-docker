@@ -48,7 +48,7 @@ rmdir "%NOTEBOOK_DIR%" /s
 
 REM Remove the container and image
 @echo Uninstalling container...
-docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" rm
+docker-compose -f "docker-compose.yml" -p "%PROJECT_NAME%" rm -f
 docker rmi "%DOCKER_IMAGE%"
 @echo Container uninstalled!
 @echo.
@@ -58,6 +58,9 @@ REM Uninstall/remove the repository
 rmdir "%DIR%" /s
 @echo Repository uninstalled!
 @echo.
+
+REM Move to the parent directory
+cd ..
 
 REM Show a docker notice
 @echo This project doesn't require docker anymore, thus it may be uninstalled.
