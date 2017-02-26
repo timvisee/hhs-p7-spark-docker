@@ -82,8 +82,13 @@ fi
 echo "Adding tags..."
 export IFS=":"
 for TAG in $IMAGE_TAGS; do
-    # Skip the primary tag and empty tags
-    if [ "$TAG" == "$IMAGE_TAG" ] || [ -z $TAG ]; then
+    # Skip empty tags
+    if [ -z $TAG ]; then
+        continue;
+    fi
+
+    # Skip the primary tag
+    if [ "$TAG" == "$IMAGE_TAG" ]; then
         echo "Tag '$TAG' is already applied."
         continue;
     fi
