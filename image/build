@@ -11,11 +11,13 @@ DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
 echo "Prepaing docker image build..."
 
 # Ask the user for a tag
-echo "Choose a tag for this build. Leave it empty to use 'latest'."
-read -p "Enter a build tag: " IMAGE_TAG
+if [ -z $IMAGE_TAG ]; then
+    echo "Choose a tag for this build. Leave it empty to use 'latest'."
+    read -p "Enter a build tag: " IMAGE_TAG
+fi
 
 # Use the default tag if nothing is entered
-if [ "$IMAGE_TAG" == "" ]; then
+if [ -z "$IMAGE_TAG" ]; then
     echo "No tag entered, using 'latest'."
     IMAGE_TAG="latest"
 fi
