@@ -80,8 +80,7 @@ simply execute the `./start` / `start.bat` script again.
 
 ## Builds
 ### Automated builds
-The project is currently being built automatically using the CI services in the
-table below.
+For each commit, a build and test is automatically started using a CI service.
 Successful builds are automatically deployed, and will be used by the project.
 
 |Service|Branch|Build Status| |
