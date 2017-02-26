@@ -102,9 +102,6 @@ do
 done
 echo
 
-# Stop any running container
-./stop
-
 # Configure what to uninstall
 if [ $CUSTOM == "yes" ]; then
     # Ask whether to remove user data
@@ -203,6 +200,9 @@ if [ $CUSTOM == "yes" ]; then
     echo
 fi
 
+# Stop any running container
+./stop
+
 log_status "Starting uninstallation."
 
 # Uninstall user data
@@ -216,7 +216,8 @@ fi
 if [ $UNINSTALL_CONTAINER == "yes" ]; then
     log_status "Uninstalling container..."
     sudo docker-compose -f "$DIR/docker-compose.yml" -p "$PROJECT_NAME" rm -f
-    if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then
+    if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" != "" ]]; then
+        log_status "Removing container image..."
         sudo docker rmi "$DOCKER_IMAGE"
     fi
     log_success "Container uninstalled!"
