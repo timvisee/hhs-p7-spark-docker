@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Script to update the project and it's cointainers.
+# Running this script will update the project resources, such as all the
+# management scripts. The container is automatically reinstalled afterwards.
+# You won't use any user data by running this script, the container however,
+# is temporarily stopped.
+
+# Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # Get the current directory

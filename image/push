@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Script to push the built image to Docker Hub.
+# Pushing makes the container automatically available for all other users that 
+# are using this container.
+#
+# Environment variables:
+# $DOCKER_USER: Username of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
+# $DOCKER_PASS: Password of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
+
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Script to stop the container.
+# This will automatically stop one or multiple containers that are running.
+
+# Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # Get the current directory

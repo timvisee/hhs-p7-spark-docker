@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Script to uninstall the container and it's resources.
+# Running this script will prompt you what you want to uninstall.
+#
+# This script is able to uninstall the following components:
+# * User data inside Jupyter Notebook
+# * Container and it's image
+# * The repository and with all management scripts
+
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 

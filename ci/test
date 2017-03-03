@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Script to test whether the project runs successfully
+# Script to test whether the project runs successfully.
+# If the test fails, the script will exit with a non-zero exit code.
 
 # Get the current directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

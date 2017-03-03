@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Script to build and push the Docker image with the current Dockerfile
+# configuration. If the built is successfuly, the image is automatically
+# pushed to Docker Hub, to make it available for all other users that are
+# using this project.
+#
+# Environment variables:
+# $IMAGE_TAGS:  [optional] List of tags to apply to the image,
+#               separated by a ':' (without spaces). Setting this
+#               variable will skip asking the user to enter a tag.
+# $DOCKER_USER: Username of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
+# $DOCKER_PASS: Password of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
+
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 

@@ -1,4 +1,10 @@
 #!/bin/bash
 
+# Script to fetch the URL of the running Jupyter Notebook instance.
+#
+# Note: This script should not be run directly after the container is started.
+# You must wait at least 2 seconds before running it, because Jupyter Notebook
+# has to start.
+
 # Get and output the actual URL
 jupyter notebook list | tail -n 1 | sed 's/\ *//;s/\ ::.*//'

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Bootstrap script, that is run when the container is started.
+# This starts all required scripts, and makes the container ready to use.
+
 # Constants
 NOTEBOOK_DIR="/root/notebook"
 NOTEBOOK_PORT=8888
@@ -32,3 +35,5 @@ fi
 # Start PySpark
 echo "Starting PySpark with Jupyter Notebook..."
 pyspark --conf spark.driver.maxResultSize=3g --driver-memory 3g
+
+echo "Bootstrap finished."

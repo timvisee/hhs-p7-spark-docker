@@ -3,9 +3,13 @@
 # Script to use in CI to build the docker image and push it to the host.
 # 
 # Environment variables:
-# $IMAGE_TAGS: List of tags to apply to the image,
-#              separated by a ':' (without spaces). Setting this
-#              variable will skip asking the user to enter a tag.
+# $IMAGE_TAGS:  List of tags to apply to the image,
+#               separated by a ':' (without spaces). Setting this
+#               variable will skip asking the user to enter a tag.
+# $DOCKER_USER: Username of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
+# $DOCKER_PASS: Password of the Docker Hub account the image should be pushed
+#               to. The image won't be pushed if left blank.
 
 # Get the current directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# File containing all functions that are globally used by all scripts in this
+# project.
+#
+# These scripts may be included using '. <this-file-path>'
+
 # Log a normal message.
 # $1: Message.
 log_normal() {

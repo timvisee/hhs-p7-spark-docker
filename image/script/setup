@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Script to setup the container.
+# This installs and configures the Jupyter Notebook user data.
+
 # Constants
 PROJECT_DIR="/root"
 PROJECT_NOTEBOOK_DIR="$PROJECT_DIR/notebook"

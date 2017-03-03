@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Script to start the container.
+# This script automatically runs the installation if the container hasn't been
+# properly installed yet. The container image is also downloaded automatically.
+#
+# Environment variables:
+# $NOTEBOOK_OPEN_BROWSER: [optional] 'false' to prevent Notebook from opening
+#                         in the default browser when it's started.
+#                         Defaults to 'true'.
+
+# Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # Get the current directory

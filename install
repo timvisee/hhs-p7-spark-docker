@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Script to install the container to make it ready to run.
+# This creates a directory that is used as data drive in Jupyter Notebook.
+# This also downloads the container image if it hasn't been downloaded already.
+
+# Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # Get the current directory
