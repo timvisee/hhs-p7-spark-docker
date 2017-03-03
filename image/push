@@ -13,6 +13,9 @@
 # Elevate permissions
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Script constants
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 
