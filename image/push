@@ -17,7 +17,7 @@
 DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 
 # Include global functions
-. "$DIR/src/functions"
+. "$DIR/../src/functions"
 
 # Make sure any image exists that can be pushed
 if [[ "$(docker images -q $DOCKER_IMAGE 2> /dev/null)" == "" ]]; then

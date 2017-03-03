@@ -18,7 +18,7 @@ DOCKER_IMAGE="timvisee/hhs-p7-spark-docker"
 DOCKER_IMAGE_TAGGED="$DOCKER_IMAGE"
 
 # Include global functions
-. "$DIR/src/functions"
+. "$DIR/../src/functions"
 
 # Header
 log_info "Prepaing docker image build..."
