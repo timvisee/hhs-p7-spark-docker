@@ -9,7 +9,7 @@ REM Script constants
 SET PROJECT_NAME=spark
 SET NOTEBOOK_DIR="%DIR%\notebook"
 SET DOCKER_IMAGE="timvisee/hhs-p7-spark-docker:latest"
-SET MACHINE_NAME=test
+SET MACHINE_NAME=test2
 
 REM Header
 @echo Uninstallation script.

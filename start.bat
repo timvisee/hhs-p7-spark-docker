@@ -8,7 +8,7 @@ SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
 SET CONTAINER_NAME=spark_spark_1
 SET NOTEBOOK_URL="http://localhost:8888"
-SET MACHINE_NAME=test
+SET MACHINE_NAME=test2
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
 REM Header
@@ -103,11 +103,12 @@ IF %ERRORLEVEL% NEQ 0 (
     REM Show a list of possible hosts
     @echo List of possible hosts:
     docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+    @echo Using host: %NOTEBOOK_HOST%
 
-    REM Replace localhost with virtual machine IP...
-    @echo Replace localhost with virtual machine host...
-    REM SET NOTEBOOK_URL=!NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%!
-    echo echo ^%NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%^% | cmd > temp.txt
+    REM Build the connection URL on the Linux VM, Windows isn't capible to do
+    REM it on it's own
+    @echo Build the connection URL on the Linux VM...
+    docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url %NOTEBOOK_URL_LOCAL% %NOTEBOOK_HOST%" > temp.txt
     SET /p NOTEBOOK_URL=<temp.txt
 
     REM Remove this after debugging
