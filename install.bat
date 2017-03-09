@@ -4,6 +4,7 @@ title Installing container...
 
 REM Script constants
 SET NOTEBOOK_DIR=.\notebook
+SET MACHINE_NAME=hhs-p7-spark-docker
 
 REM Header
 @echo Starting installation...
@@ -29,7 +30,7 @@ IF %ERRORLEVEL% NEQ 0 (
 
 ) ELSE (
     REM Show a status message
-    @echo Switched to Docker toolbox, not regular Docker
+    @echo Switched to Docker toolbox using a VM, not regular Docker
 
     REM Install the virtual machine if it doesn't exist
     docker-machine ls | find /i "%MACHINE_NAME%"

@@ -38,7 +38,7 @@ IF %ERRORLEVEL% NEQ 0 (
 
 ) ELSE (
     REM Show a status message
-    @echo Switched to Docker toolbox, not regular Docker
+    @echo Switched to Docker toolbox using a VM, not regular Docker
 
     REM Install the virtual machine if it doesn't exist
     docker-machine ls | find /i "%MACHINE_NAME%"
@@ -50,33 +50,12 @@ IF %ERRORLEVEL% NEQ 0 (
         docker-machine start hhs-p7-spark-docker
 
     ) ELSE (
-        @echo Virtual machine for Docker could not be found. Creating...
-
-        REM Create the docker machine
-        @echo Creating virtual Linux machine to run Docker on...
-        docker-machine create --driver virtualbox %MACHINE_NAME%
-
-        REM Install bash on the virtual machine
-        @echo Install bash on virtual machine...
-        docker-machine ssh %MACHINE_NAME% "tce-load -wi bash.tcz"
-
-        REM Clone the project repository on the virtual machine
-        @echo Clone the repository on the virtual machine...
-        docker-machine ssh %MACHINE_NAME% "git clone https://github.com/timvisee/hhs-p7-spark-docker.git ~/hhs-p7-spark-docker"
-
-        REM Install docker-compose on the virtual machine
-        @echo Install docker-compose on the virtual machine...
-        docker-machine ssh %MACHINE_NAME% "sudo curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose"
-        @echo Make docker-compose executable...
-        docker-machine ssh %MACHINE_NAME% "sudo chmod +x /usr/local/bin/docker-compose"
-
-        REM Install the container on the virtual machine...
-        @echo Install the container on the virtual machine...
-        docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/install"
+        @echo Virtual machine for Docker could not be found. Running installation...
+        call install.bat
     )
 
     REM Start the container on the virtual machine...
-    echo Start the container on the virtual machine...
+    @echo Start the container on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/start"
 
     REM Get the URL Of the running Notebook Jupyter instance 
