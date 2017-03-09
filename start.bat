@@ -8,6 +8,7 @@ SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
 SET NOTEBOOK_URL="http://localhost:8888"
 SET MACHINE_NAME=hhs-p7-spark-docker
+SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
 REM Header
 @echo Preparing to start container...
@@ -22,6 +23,22 @@ IF NOT EXIST "%NOTEBOOK_DIR%" (
 REM Check whether to use regular docker or docker tooblox
 WHERE docker-machine
 IF %ERRORLEVEL% NEQ 0 (
+
+    REM Make sure docker is installed
+    WHERE docker
+    IF %ERRORLEVEL% NEQ 0 (
+        REM Show an error message
+        @echo.
+        @echo ERROR: Docker hasn't been installed correctly.
+        @echo        The command 'docker' isn't recognized.
+        @echo        Please read the README and follow the installation instructions.
+
+        REM Open the README in the browser
+        start "%README_URL%"
+        
+        exit
+    )
+
     REM Show a status message
     @echo Switched to regular Docker, not Docker Toolbox
 
