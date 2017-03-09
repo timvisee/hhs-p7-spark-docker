@@ -6,6 +6,7 @@ REM Script constants
 SET PROJECT_NAME=spark
 SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
+SET CONTAINER_NAME=spark_spark_1
 SET NOTEBOOK_URL="http://localhost:8888"
 SET MACHINE_NAME=hhs-p7-spark-docker
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
@@ -23,7 +24,6 @@ IF NOT EXIST "%NOTEBOOK_DIR%" (
 REM Check whether to use regular docker or docker tooblox
 WHERE docker-machine
 IF %ERRORLEVEL% NEQ 0 (
-
     REM Make sure docker is installed
     WHERE docker
     IF %ERRORLEVEL% NEQ 0 (
@@ -64,8 +64,7 @@ IF %ERRORLEVEL% NEQ 0 (
     REM Get the URL of the running Juptyer Notebook instance
     @echo Waiting 2 seconds for Jupyter Notebook to start...
     @timeout /t 2 /nobreak
-    REM TODO: Get container name from constant
-    docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
+    docker exec %CONTAINER_NAME% /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
     SET /p NOTEBOOK_URL=<url.txt
 
 ) ELSE (
@@ -91,9 +90,8 @@ IF %ERRORLEVEL% NEQ 0 (
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/start"
 
     REM Get the URL Of the running Notebook Jupyter instance 
-    REM TODO: Get container name from constant
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
-    docker-machine ssh %MACHINE_NAME% 'docker exec spark_spark_1 /bin/bash "%CONTAINER_HOME%/geturl"' > temp.txt
+    docker-machine ssh %MACHINE_NAME% 'docker exec %CONTAINER_NAME% /bin/bash "%CONTAINER_HOME%/geturl"' > temp.txt
     SET /p NOTEBOOK_URL_LOCAL=<temp.txt
 
     REM Fetch the URLs of the active machines
