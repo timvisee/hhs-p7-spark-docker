@@ -35,7 +35,7 @@ and has various resources and assignments used in class preinstalled!
     * Linux
     * Mac OS X
     * Windows 10 Pro, Enterprise or Edu
-    * Other Windows versions: [See special instructions](#usage-on-other-windows-systems)
+    * For other Windows versions, follow the [special instructions](#usage-on-other-windows-systems)
 * [Docker](https://www.docker.com/)
 * Docker composer (should come with Docker or Docker Toolbox)
 * [Git](https://git-scm.com/)
@@ -66,7 +66,7 @@ The installation is started automatically when starting for the first time.
 The download of the container image might take a long while as it's around
 1.3GBs in size.
 
-### Usage on other Windows systems
+## Usage on other Windows systems
 * If you're using Windows 10 Pro, Enterprise or Edu, do not use these instructions!
 If you're running one of these three versions, you must follow the regular installation instructions [here](#usage).
 * Windows Vista, XP or earlier isn't supported.
@@ -77,7 +77,7 @@ operating system is missing various features.
 This project with the Docker container can still be installed however,
 with a little workaround.
 For these Windows versions, the project automatically set up a virtual machine
-running Linux to run the Docker container with Spark.
+running Linux to run the Docker container in.
 This might sound difficult,
 but it's quite easy in fact as the process is fully automated!
 
@@ -166,6 +166,11 @@ should be in the same location, but it might differ depending on the
 configuration.
 
 ## FAQ
+#### The container doesn't start, what to do?
+This is probably because you haven't enabled VT-x / virtualization in your BIOS.
+Enable this and try it again.
+See the [requirements](#requirements) for more information.
+
 #### How do I open Jupyter Notebook in my browser?
 Jupyter Notebook should automatically open in your browser when you start the
 container.
