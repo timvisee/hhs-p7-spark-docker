@@ -100,17 +100,15 @@ IF %ERRORLEVEL% NEQ 0 (
     docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | tail -n 1" > temp.txt
     SET /p NOTEBOOK_HOST=<temp.txt
 
-    REM TODO: Remove this debug code!
-    @echo.
-    @echo LIST OF HOSTS:
+    REM Show a list of possible hosts
+    @echo List of possible hosts:
     docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-    @echo.
 
     REM Replace localhost with virtual machine IP...
     @echo Replace localhost with virtual machine host...
     REM SET NOTEBOOK_URL=!NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%!
-    SET LOCALHOST_NAME=localhost
-    call SET NOTEBOOK_URL=%%NOTEBOOK_URL_LOCAL:%LOCALHOST_NAME%^=%NOTEBOOK_HOST%%%
+    echo echo ^%NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%^% | cmd > temp.txt
+    SET /p NOTEBOOK_URL=<temp.txt
 
     REM Remove this after debugging
     echo Possible notebook URL: %NOTEBOOK_URL%
