@@ -95,31 +95,8 @@ IF %ERRORLEVEL% NEQ 0 (
 
     REM Get the URL Of the running Notebook Jupyter instance 
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
-    docker-machine ssh %MACHINE_NAME% 'docker exec %CONTAINER_NAME% /bin/bash "%CONTAINER_HOME%/geturl"' > temp.txt
+    docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url" > temp.txt
     SET /p NOTEBOOK_URL=<temp.txt
-
-    REM Fetch the URLs of the active machines
-    REM TODO: Make sure to only fetch the URL of the docker machine, and not other ones
-    @echo Getting host address of the virtual machine...
-    docker-machine ip %MACHINE_NAME% > temp.txt
-    SET /p NOTEBOOK_HOST=<temp.txt
-
-    REM Show a list of possible hosts
-    @echo List of possible hosts:
-    docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-    @echo Selected host: %NOTEBOOK_HOST%
-
-    REM Remove this after debugging
-    echo Notebook URL: %NOTEBOOK_URL%
-
-    REM Build the connection URL on the Linux VM, Windows isn't capible to do
-    REM it on it's own
-    @echo Build the connection URL on the Linux VM...
-    docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url %NOTEBOOK_URL_LOCAL% %NOTEBOOK_HOST%" > temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
-
-    REM Remove this after debugging
-    echo Possible notebook URL: %NOTEBOOK_URL%
 )
 
 REM Open Notebook in the default browser
