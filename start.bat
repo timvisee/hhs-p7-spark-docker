@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 
 title Starting container...
 
@@ -105,16 +106,16 @@ IF %ERRORLEVEL% NEQ 0 (
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url"
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url" > url.txt
-    SET /p URL=<url.txt
+    SET /p NOTEPAD_URL=<url.txt
 
     REM Open Notebook in the default browser
     @echo Opening Notebook in your default browser...
-    start %URL%
+    start %NOTEPAD_URL%
 
     REM Show the URL of the running notebook instance
     @echo.
     @echo Notebook is running at:
-    @echo %URL%
+    @echo %NOTEPAD_URL%
 )
 
 REM Started successfully, show a status message
