@@ -85,6 +85,10 @@ IF %ERRORLEVEL% NEQ 0 (
         call install.bat
     )
 
+    REM Set the docker machine environment
+    Echo Set the docker machine environment...
+    docker-machine env %MACHINE_NAME%
+
     REM Start the container on the virtual machine...
     @echo Start the container on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/start"
@@ -92,18 +96,21 @@ IF %ERRORLEVEL% NEQ 0 (
     REM Get the URL Of the running Notebook Jupyter instance 
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
     docker-machine ssh %MACHINE_NAME% 'docker exec %CONTAINER_NAME% /bin/bash "%CONTAINER_HOME%/geturl"' > temp.txt
-    SET /p NOTEBOOK_URL_LOCAL=<temp.txt
+    SET /p NOTEBOOK_URL=<temp.txt
 
     REM Fetch the URLs of the active machines
     REM TODO: Make sure to only fetch the URL of the docker machine, and not other ones
     @echo Getting host address of the virtual machine...
-    docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | tail -n 1" > temp.txt
+    docker-machine ip %MACHINE_NAME% > temp.txt
     SET /p NOTEBOOK_HOST=<temp.txt
 
     REM Show a list of possible hosts
     @echo List of possible hosts:
     docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-    @echo Using host: %NOTEBOOK_HOST%
+    @echo Selected host: %NOTEBOOK_HOST%
+
+    REM Remove this after debugging
+    echo Notebook URL: %NOTEBOOK_URL%
 
     REM Build the connection URL on the Linux VM, Windows isn't capible to do
     REM it on it's own
