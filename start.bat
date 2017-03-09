@@ -97,7 +97,7 @@ IF %ERRORLEVEL% NEQ 0 (
     REM Fetch the URLs of the active machines
     REM TODO: Make sure to only fetch the URL of the docker machine, and not other ones
     @echo Getting host address of the virtual machine...
-    docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | head -n 1" > temp.txt
+    docker-machine ssh %MACHINE_NAME% "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | tail -n 1" > temp.txt
     SET /p NOTEBOOK_HOST=<temp.txt
 
     REM TODO: Remove this debug code!
