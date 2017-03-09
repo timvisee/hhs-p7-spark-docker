@@ -1,8 +1,9 @@
 # Notebook working directory
 /notebook
 
-# Temporary URL file created on Windows
+# Temporary files created on Windows
 url.txt
+temp.txt
 
 # Vim swap files
 .*.swp
