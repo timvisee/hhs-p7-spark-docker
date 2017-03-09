@@ -106,6 +106,8 @@ IF %ERRORLEVEL% NEQ 0 (
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url"
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url" > url.txt
+    if "%~1" LEQ "" set uname=%1
+    cls
     SET /p NOTEPAD_URL=<url.txt
 
     REM Open Notebook in the default browser
