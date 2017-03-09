@@ -5,6 +5,9 @@
 #
 # These scripts may be included using '. <this-file-path>'
 
+# Script constants
+README_URL="https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md"
+
 # Log a normal message.
 # $1: Message.
 log_normal() {
@@ -75,4 +78,57 @@ get_command_user() {
 
     # Return the real current user
     echo "$USER"
+}
+
+# Require that the docker and docker-compose commands are installed.
+# Show a warning and exit the code otherwise.
+require_docker_commands() {
+    # Make sure docker is installed
+    if command_exists docker; then
+        # Make sure docker compose is installed
+        if command_exists docker-compose; then
+            return
+
+        else
+            # Show an error message
+            echo
+            log_error "Docker hasn't been installed correctly."
+            log_error "The command 'docker-compose' isn't recognized."
+            log_info "Please read the README and follow the installation instructions."
+        fi
+    else
+        # Show an error message
+        echo
+        log_error "Docker hasn't been installed correctly."
+        log_error "The command 'docker' isn't recognized."
+        log_info "Please check the README and follow the installation instructions."
+    fi
+
+
+    # Open the README in the browser
+    if [ $(uname) == "Linux" ]; then
+        # Get the command user
+        CMD_USER="$(get_command_user)"
+
+        # Open the URL in the browser with the current (non-sudo) user
+        if command_exists xdg-open ; then
+            log_info "Opening the README in your default browser as $CMD_USER..."
+            sudo su -c "xdg-open \"$README_URL\"" "$CMD_USER"
+        elif command_exists firefox ; then
+            log_info "Opening the README in Firefox as $CMD_USER..."
+            sudo su -c "firefox \"$README_URL\"" "$CMD_USER"
+        else
+            log_warning "No suitable method found to automatically open the README."
+        fi
+
+    elif [ $(uname) == "Darwin" ]; then
+        log_success "Opening the README in Safari..."
+        open "$README_URL"
+
+    else
+        log_warning "Unable to automatically open the README, unknown platform."
+    fi
+
+    # Exit the script
+    exit
 }
