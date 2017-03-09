@@ -5,10 +5,10 @@ Those instructions are described on this page.
 For the normal instructions, a list of commands,
 the FAQ and more visit the main [README](README.md).
 
-## Requirements
+## Requirements on Windows
 * Operating system:
     * Windows 7, 8 or 10 Home/Mobile
-    * For other operating systems versions,
+    * For other Windows versions or operating systems,
       follow the [regular instructions](README.md#usage-on-other-windows-systems)
 * [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
   (not the normal Docker version)
@@ -18,7 +18,6 @@ the FAQ and more visit the main [README](README.md).
 * ~1.3GB of free space
 
 ## Usage on Windows
-Notice:
 * If you're using Windows 10 Pro, Enterprise or Edu,
   do not use these instructions!
 If you're running one of these three versions,
@@ -42,7 +41,7 @@ but you won't be able to start them anymore. There's no fix for this.
 
 #### Installation
 Follow these steps to get the container up and running:
-* Make sure you meet all [requirements](#requirements) above,
+* Make sure you meet all [requirements](#requirements-on-windows) above,
   install required software.
 * Clone the project repository
   (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
