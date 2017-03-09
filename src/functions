@@ -59,3 +59,20 @@ log_info() {
 command_exists() {
     type "$1" &> /dev/null ;
 }
+
+# Get the user that executed the script.
+# If the script is run as root user with the sudo command, the user that called
+# sudo is returned if known, instead of the 'root' user.
+get_command_user() {
+    # Check whether we're running root, the user probably used sudo
+    if [ $USER == "root" ]; then
+        # Return the sudo user if known
+        if [ -n $SUDO_USER ]; then
+            echo "$SUDO_USER"
+            return
+        fi
+    fi
+
+    # Return the real current user
+    echo "$USER"
+}
