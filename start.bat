@@ -7,7 +7,6 @@ SET PROJECT_NAME=spark
 SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
 SET CONTAINER_NAME=spark_spark_1
-SET NOTEBOOK_URL=http://localhost:8888
 SET MACHINE_NAME=test2
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
