@@ -39,6 +39,21 @@ IF %ERRORLEVEL% NEQ 0 (
         exit
     )
 
+    REM Make sure docker-compose is installed
+    WHERE docker-compose
+    IF %ERRORLEVEL% NEQ 0 (
+        REM Show an error message
+        @echo.
+        @echo ERROR: Docker hasn't been installed correctly.
+        @echo        The command 'docker-compose' isn't recognized.
+        @echo        Please read the README and follow the installation instructions.
+
+        REM Open the README in the browser
+        start "%README_URL%"
+        
+        exit
+    )
+
     REM Show a status message
     @echo Switched to regular Docker, not Docker Toolbox
 
