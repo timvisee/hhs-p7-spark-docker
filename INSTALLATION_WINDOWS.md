@@ -68,6 +68,8 @@ some things might be a little different:
   access these files though, so you should be fine! If you'd like to access
   them anyway, some specific commands must be used.
 * The performance of Jupyter Notebook might be slightly worse.
+* You must run the `stop.bat` script before shutting down your Windows machine,
+  or else you might corrupt the virtual machine running the container instance.
 
 ## More information
 For more information, a list of commands,
