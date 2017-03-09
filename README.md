@@ -34,22 +34,26 @@ and has various resources and assignments used in class preinstalled!
 * Operating system:
     * Linux
     * Mac OS X
-    * Windows 10 Professional or Enterprise
-* [Docker](https://www.docker.com/)
+    * Windows 10 Pro, Enterprise or Edu
+    * For other Windows versions, follow the [special requirements and instructions](INSTALLATION_WINDOWS.md#usage-on-windows)
+* [Docker](https://www.docker.com/) (not Docker toolbox)
 * Docker composer (should come with Docker)
 * [Git](https://git-scm.com/)
-* VT-x / virtualization must be enabled.
+* **Important:** VT-x / virtualization must be enabled in the BIOS.
+  [More information](https://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/).
 * ~1.3GB of free space
 
 ## Usage
-Follow these steps to get the container up and running.
+Follow these steps to get the container up and running:
 * Make sure you meet all [requirements](#requirements) above,
   install missing software.
 * Clone the project repository
   (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
 * Change into the project repository
   (`cd hhs-p7-spark-docker`)
-* If on Windows, enable sharing of your primary drive in the Docker settings.
+* **Important:** If on Windows, enable sharing of the drive the project is
+  installed on.
+  [More information](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
 * Install and start the container:
     * Linux/OSX: `./start` or `./update-and-start`
     * Windows: `start.bat` or `update-and-start.bat`
@@ -116,6 +120,11 @@ should be in the same location, but it might differ depending on the
 configuration.
 
 ## FAQ
+#### The container doesn't start, what to do?
+This is probably because you haven't enabled VT-x / virtualization in your BIOS.
+Enable this and try it again.
+See the [requirements](#requirements) for more information.
+
 #### How do I open Jupyter Notebook in my browser?
 Jupyter Notebook should automatically open in your browser when you start the
 container.
@@ -146,6 +155,15 @@ The container can be stopped using the `./stop` / `stop.bat` command.
 Yes. Even though the container is based on
 [Alpine Linux](https://alpinelinux.org/), Docker ensures that it will run on
 Windows too.
+
+For Windows 7, 8 or 10 Home/Mobile you must follow the special requirements
+and installation instructions [here](INSTALLATION_WINDOWS.md#usage-on-windows).
+
+#### Docker doesn't work.
+For Windows 7, 8 or 10 Home/Mobile, you must use Docker Toolbox instead of the
+normal Docker version to use this project. Please follow the special
+requirements and installation instructions
+[here](INSTALLATION_WINDOWS.md#usage-on-windows).
 
 ## License
 This project is released under the GNU GPL-3.0 license.

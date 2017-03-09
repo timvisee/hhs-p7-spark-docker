@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Build the connection string for Windows.
+# Windows isn't capible to properly replace strings by itself,
+# thus we're doing it through linux.
+#
+# Returns the proper URL.
+
+# Get the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Script constants
+CONTAINER_HOME="/root"
+CONTAINER_NAME="spark_spark_1"
+
+# Get the hosting URL
+URL="$(sudo docker exec -i -t "$CONTAINER_NAME" "$CONTAINER_HOME/geturl")"
+
+# Get the host
+HOST="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | head -n 1)"
+
+# Build and echo the URL
+echo "${URL/localhost/$HOST}"

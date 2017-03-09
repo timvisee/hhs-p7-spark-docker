@@ -16,6 +16,9 @@ NOTEBOOK_DIR="$DIR/notebook"
 # Include global functions
 . "$DIR/src/functions"
 
+# Require that Docker is installed
+require_docker_commands
+
 # Header
 log_info "Starting installation..."
 
