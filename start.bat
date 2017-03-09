@@ -78,7 +78,7 @@ IF %ERRORLEVEL% NEQ 0 (
 
         REM Make sure the Docker virtual machine is started
         @echo Ensure the Docker virtual machine is started...
-        docker-machine start hhs-p7-spark-docker
+        docker-machine start %MACHINE_NAME%
 
     ) ELSE (
         @echo Virtual machine for Docker could not be found. Running installation...
