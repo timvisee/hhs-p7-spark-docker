@@ -47,7 +47,9 @@ Follow these steps to get the container up and running:
   (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
 * Change into the project repository
   (`cd hhs-p7-spark-docker`)
-* Install and start the container: `start.bat` or `update-and-start.bat`
+* Install and start the container: `start.bat` or `update-and-start.bat`  
+  **Important:** The installation/start process must not be stopped, as it will
+  possibly break the system.
 
 The installation is started automatically when starting for the first time,
 and will set up the virtual machine, container and user files.
