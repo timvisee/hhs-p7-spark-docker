@@ -4,7 +4,7 @@ title Stopping Spark container...
 
 REM Script constants
 SET PROJECT_NAME=spark
-SET MACHINE_NAME=hhs-p7-spark-docker
+SET MACHINE_NAME=test
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
 REM Check whether to use regular docker or docker tooblox
