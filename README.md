@@ -36,8 +36,8 @@ and has various resources and assignments used in class preinstalled!
     * Mac OS X
     * Windows 10 Pro, Enterprise or Edu
     * For other Windows versions, follow the [special requirements and instructions](INSTALLATION_WINDOWS.md#usage-on-windows)
-* [Docker](https://www.docker.com/)
-* Docker composer (should come with Docker or Docker Toolbox)
+* [Docker](https://www.docker.com/) (not Docker toolbox)
+* Docker composer (should come with Docker)
 * [Git](https://git-scm.com/)
 * **Important:** VT-x / virtualization must be enabled in the BIOS.
   [More information](https://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/).
