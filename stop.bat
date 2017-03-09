@@ -64,7 +64,7 @@ IF %ERRORLEVEL% NEQ 0 (
 
         REM Stop the virtual machine
         @echo Stop the virtual machine...
-        docker-machine stop %MACHINE_NAME%
+        REM docker-machine stop %MACHINE_NAME%
 
         @echo The container and the virtual machine has been stopped.
     )
