@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Build the connection string for Windows.
+# Windows isn't capible to properly replace strings by itself,
+# thus we're doing it through linux.
+#
+# Parameters:
+# $1: Host with 'localhost' that should be replaced.
+# $2: New host to replace 'localhost' with
+#
+# Returns the proper URL.
+
+# Get the parameters
+URL="$1"
+HOST="$2"
+
+# Build and echo the URL
+echo "${URL/localhost/$HOST}"
