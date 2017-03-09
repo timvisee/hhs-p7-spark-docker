@@ -108,7 +108,12 @@ IF %ERRORLEVEL% NEQ 0 (
 
     REM Replace localhost with virtual machine IP...
     @echo Replace localhost with virtual machine host...
-    SET NOTEBOOK_URL=!NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%!
+    REM SET NOTEBOOK_URL=!NOTEBOOK_URL_LOCAL:localhost=%NOTEBOOK_HOST%!
+    SET LOCALHOST_NAME=localhost
+    call SET NOTEBOOK_URL=%%NOTEBOOK_URL_LOCAL:%LOCALHOST_NAME%^=%NOTEBOOK_HOST%%%
+
+    REM Remove this after debugging
+    echo Possible notebook URL: %NOTEBOOK_URL%
 )
 
 REM Open Notebook in the default browser
