@@ -15,6 +15,9 @@ PROJECT_NAME="spark"
 # Include global functions
 . "$DIR/src/functions"
 
+# Require that Docker is installed
+require_docker_commands
+
 # Stop the docker container and detach
 log_info "Stopping running Spark containers in Docker..."
 sudo docker-compose -p "$PROJECT_NAME" stop

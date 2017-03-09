@@ -22,6 +22,9 @@ DOCKER_IMAGE="timvisee/hhs-p7-spark-docker:latest"
 # Include global functions
 . "$DIR/src/functions"
 
+# Require that Docker is installed
+require_docker_commands
+
 # Header
 log_info "Uninstallation script."
 echo
