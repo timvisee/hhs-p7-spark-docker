@@ -94,7 +94,7 @@ IF %ERRORLEVEL% NEQ 0 (
     )
 
     REM Set the docker machine environment
-    Echo Set the docker machine environment...
+    @echo Set the docker machine environment to %MACHINE_NAME%...
     docker-machine env %MACHINE_NAME%
 
     REM Start the container on the virtual machine...
@@ -105,11 +105,6 @@ IF %ERRORLEVEL% NEQ 0 (
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url"
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url" > temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
-    SET /p NOTEBOOK_URL=<temp.txt
     SET /p NOTEBOOK_URL=<temp.txt
 
     REM Open Notebook in the default browser

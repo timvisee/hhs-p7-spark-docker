@@ -23,6 +23,7 @@ the FAQ and more visit the main [README](README.md).
 If you're running one of these three versions,
   you must follow the regular installation instructions [here](README.md#usage).
 * Windows Vista, XP or earlier isn't supported.
+* The container does not work well under these Windows versions.
 
 #### Introduction
 You're running Windows 7, 8 or Windows 10 Home/Mobile.
