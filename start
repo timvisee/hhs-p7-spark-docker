@@ -49,7 +49,7 @@ if [ "$NOTEBOOK_OPEN_BROWSER" == "false" ]; then
 
 elif [ $(uname) == "Linux" ]; then
     # Get the command user
-    $CMD_USER = "$(get_command_user)"
+    CMD_USER="$(get_command_user)"
 
     # Open the URL in the browser with the current (non-sudo) user
     if command_exists xdg-open ; then
