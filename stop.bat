@@ -60,7 +60,7 @@ IF %ERRORLEVEL% NEQ 0 (
     ) ELSE (
         REM Stop the container on the virtual machine
         @echo Stop the container on the virtual machine...
-        docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/stop"
+        docker-machine ssh %MACHINE_NAME% "cd ~/hhs-p7-spark-docker/ && ~/hhs-p7-spark-docker/stop"
 
         REM Stop the virtual machine
         @echo Stop the virtual machine...
