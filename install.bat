@@ -12,10 +12,10 @@ REM Header
 @echo Starting installation...
 
 REM Check whether to use regular docker or docker tooblox
-WHERE docker-machine
+@WHERE docker-machine
 IF %ERRORLEVEL% NEQ 0 (
     REM Make sure docker is installed
-    WHERE docker
+    @WHERE docker
     IF %ERRORLEVEL% NEQ 0 (
         REM Show an error message
         @echo.
@@ -30,7 +30,7 @@ IF %ERRORLEVEL% NEQ 0 (
     )
 
     REM Make sure docker-compose is installed
-    WHERE docker-compose
+    @WHERE docker-compose
     IF %ERRORLEVEL% NEQ 0 (
         REM Show an error message
         @echo.
