@@ -7,7 +7,7 @@ SET PROJECT_NAME=spark
 SET NOTEBOOK_DIR=.\notebook
 SET CONTAINER_HOME=/root
 SET CONTAINER_NAME=spark_spark_1
-SET NOTEBOOK_URL="http://localhost:8888"
+SET NOTEBOOK_URL=http://localhost:8888
 SET MACHINE_NAME=test2
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
@@ -67,6 +67,15 @@ IF %ERRORLEVEL% NEQ 0 (
     docker exec %CONTAINER_NAME% /bin/bash "%CONTAINER_HOME%/geturl" > url.txt
     SET /p NOTEBOOK_URL=<url.txt
 
+    REM Open Notebook in the default browser
+    @echo Opening Notebook in your default browser...
+    start %NOTEBOOK_URL%
+
+    REM Show the URL of the running notebook instance
+    @echo.
+    @echo Notebook is running at:
+    @echo %NOTEBOOK_URL%
+
 ) ELSE (
     REM Show a status message
     @echo Switched to Docker toolbox using a VM, not regular Docker
@@ -97,16 +106,16 @@ IF %ERRORLEVEL% NEQ 0 (
     @echo Fetching URL for Jupyter Notebook on the virtual machine...
     docker-machine ssh %MACHINE_NAME% "~/hhs-p7-spark-docker/src/build_windows_url" > temp.txt
     SET /p NOTEBOOK_URL=<temp.txt
+
+    REM Open Notebook in the default browser
+    @echo Opening Notebook in your default browser...
+    start %NOTEBOOK_URL%
+
+    REM Show the URL of the running notebook instance
+    @echo.
+    @echo Notebook is running at:
+    @echo %NOTEBOOK_URL%
 )
-
-REM Open Notebook in the default browser
-@echo Opening Notebook in your default browser...
-start %NOTEBOOK_URL%
-
-REM Show the URL of the running notebook instance
-@echo.
-@echo Notebook is running at:
-@echo %NOTEBOOK_URL%
 
 REM Started successfully, show a status message
 @echo.
