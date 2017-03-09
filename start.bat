@@ -14,13 +14,6 @@ SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/READM
 REM Header
 @echo Preparing to start container...
 
-REM Start the installation script if the directory doesn't exist
-IF NOT EXIST "%NOTEBOOK_DIR%" (
-    @echo The notebook directory isn't available, starting installation...
-    call install.bat
-    @echo.
-)
-
 REM Check whether to use regular docker or docker tooblox
 WHERE docker-machine
 IF %ERRORLEVEL% NEQ 0 (
@@ -56,6 +49,13 @@ IF %ERRORLEVEL% NEQ 0 (
 
     REM Show a status message
     @echo Switched to regular Docker, not Docker Toolbox
+
+    REM Start the installation script if the directory doesn't exist
+    IF NOT EXIST "%NOTEBOOK_DIR%" (
+        @echo The notebook directory isn't available, starting installation...
+        call install.bat
+        @echo.
+    )
 
     REM Start the docker container
     @echo Starting container using Docker...
