@@ -42,7 +42,7 @@ REM Stop any running containers
 call stop.bat
 
 REM Validate Docker is installed correctly
-@WHERE docker-machine
+@WHERE docker-machinetest
 IF %ERRORLEVEL% NEQ 0 (
     REM Make sure docker is installed
     @WHERE docker

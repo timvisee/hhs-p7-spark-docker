@@ -8,7 +8,7 @@ SET MACHINE_NAME=test2
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
 REM Check whether to use regular docker or docker tooblox
-@WHERE docker-machine
+@WHERE docker-machinetest
 IF %ERRORLEVEL% NEQ 0 (
     REM Show a status message
     @echo Switched to regular Docker, not Docker Toolbox

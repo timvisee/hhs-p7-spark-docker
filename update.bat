@@ -15,7 +15,7 @@ git fetch
 git pull
 
 REM Check whether to use regular docker or docker tooblox
-@WHERE docker-machine
+@WHERE docker-machinetest
 IF %ERRORLEVEL% NEQ 0 (
     REM Make sure docker is installed
     @WHERE docker
