@@ -4,7 +4,6 @@ title Installing container...
 
 REM Script constants
 SET NOTEBOOK_DIR=.\notebook
-SET MACHINE_NAME=test2
 SET MACHINE_DRIVER=virtualbox
 SET README_URL=https://github.com/timvisee/hhs-p7-spark-docker/blob/master/README.md
 
