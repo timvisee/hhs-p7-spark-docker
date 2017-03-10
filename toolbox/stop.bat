@@ -22,8 +22,8 @@ IF NOT errorlevel 1 (
 
     REM Stop the virtual machine
     @echo Stop the virtual machine...
-    REM docker-machine stop controlvm %MACHINE_NAME% savestate
-    "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" %MACHINE_NAME%
+    REM docker-machine stop
+    "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm %MACHINE_NAME% savestate
 
     @echo The container and the virtual machine has been stopped.
 )
