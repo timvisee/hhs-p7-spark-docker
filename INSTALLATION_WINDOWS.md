@@ -23,7 +23,10 @@ the FAQ and more visit the main [README](README.md).
 If you're running one of these three versions,
   you must follow the regular installation instructions [here](README.md#usage).
 * Windows Vista, XP or earlier isn't supported.
-* The container does not work well under these Windows versions.
+* The container does NOT work well under these Windows versions.
+  It's recommended to install a virtual machine (using Virtual Box) that runs
+  any Linux variant, such as Ubuntu. You'll then be able to use the normal
+  installation [here](README.md#usage) which works much better!
 
 #### Introduction
 You're running Windows 7, 8 or Windows 10 Home/Mobile.
@@ -48,7 +51,7 @@ Follow these steps to get the container up and running:
   (`git clone https://github.com/timvisee/hhs-p7-spark-docker.git`)
 * Change into the project repository
   (`cd hhs-p7-spark-docker`)
-* Install and start the container: `start.bat` or `update-and-start.bat`  
+* Install and start the container: `toolbox/start.bat` or `toolbox/update-and-start.bat`  
   **Important:** The installation/start process must not be stopped, as it will
   possibly break the system.
 
@@ -57,7 +60,10 @@ and will set up the virtual machine, container and user files.
 The set up of the virtual machine and container might take a long while as it's
 around 1.3GBs in size.
 
-It's recommended to use the `update-and-start.bat` script in the future to
+When using Docker toolbox, only the scripts in the `toolbox` directory should
+be used. These scripts are different from the *normal* scripts.
+
+It's recommended to use the `toolbox/update-and-start.bat` script in the future to
 start the container. This will automatically fetch new updates when available.
 
 #### Differences
@@ -68,7 +74,7 @@ some things might be a little different:
   access these files though, so you should be fine! If you'd like to access
   them anyway, some specific commands must be used.
 * The performance of Jupyter Notebook might be slightly worse.
-* You must run the `stop.bat` script before shutting down your Windows machine,
+* You must run the `toolbox/stop.bat` script before shutting down your Windows machine,
   or else you might corrupt the virtual machine running the container instance.
 
 ## More information

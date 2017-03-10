@@ -34,7 +34,7 @@ and has various resources and assignments used in class preinstalled!
 * Operating system:
     * Linux
     * Mac OS X
-    * Windows 10 Pro, Enterprise or Edu
+    * Windows 10 Pro, Enterprise or Edu (not Home or Mobile)
     * For other Windows versions, follow the [special requirements and instructions](INSTALLATION_WINDOWS.md#usage-on-windows)
 * [Docker](https://www.docker.com/) (not Docker toolbox)
 * Docker composer (should come with Docker)
