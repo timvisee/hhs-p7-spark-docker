@@ -91,7 +91,7 @@ Successful builds are automatically deployed, and will be used by everybody
 using this project with these management scripts.
 
 |Service|Branch|Build Status| |
-|---:|:---|:---:|:---|---|
+|---:|:---|:---:|:---|
 |Travis CI|master|[![Build status on Travis CI on master](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg?branch=master)](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|[View Status](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|
 |Travis CI|last commit|[![Build status on Travis CI for last commit](https://travis-ci.org/timvisee/hhs-p7-spark-docker.svg)](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|[View Status](https://travis-ci.org/timvisee/hhs-p7-spark-docker)|
 
