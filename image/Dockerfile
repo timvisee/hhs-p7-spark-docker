@@ -13,8 +13,7 @@ RUN apk update \
  && apk add sudo bash wget git bzip2 unzip zlib curl ca-certificates libstdc++ glib libxext libxrender tini \
  && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-2.23-r1.apk" -o /tmp/glibc.apk \
  && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-bin-2.23-r1.apk" -o /tmp/glibc-bin.apk \
- && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-i18n-2.23-r1.apk" -o /tmp/glibc-i18n.apk \
- && apk add --allow-untrusted /tmp/glibc*.apk \
+ && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-i18n-2.23-r1.apk" -o /tmp/glibc-i18n.apk \ && apk add --allow-untrusted /tmp/glibc*.apk \
  && /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib \
  && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 
@@ -92,6 +91,11 @@ RUN cd /tmp \
  && tar xzvf spark.tgz \
  && mv $SPARK_PACKAGE_NAME/ spark \
  && sudo mv spark/ /usr/lib/
+
+# Configure spark and it's memory limits
+RUN echo "spark.app.name hhs-p7-spark-docker" >> /usr/lib/spark/conf/spark-defaults.conf
+ && echo "spark.driver.memory 200g" >> /usr/lib/spark/conf/spark-defaults.conf
+ && "spark.driver.maxResultSize 0" >> /usr/lib/spark/conf/spark-defaults.conf
 
 ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
 
