@@ -1,5 +1,5 @@
 # Base image
-FROM alpine:latest
+FROM alpine:3.4
 
 # Maintainer
 MAINTAINER Tim Visée <timvisee@gmail.com>
@@ -13,7 +13,8 @@ RUN apk update \
  && apk add sudo bash wget git bzip2 unzip zlib curl ca-certificates libstdc++ glib libxext libxrender tini \
  && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-2.23-r1.apk" -o /tmp/glibc.apk \
  && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-bin-2.23-r1.apk" -o /tmp/glibc-bin.apk \
- && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-i18n-2.23-r1.apk" -o /tmp/glibc-i18n.apk \ && apk add --allow-untrusted /tmp/glibc*.apk \
+ && curl -L "https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-i18n-2.23-r1.apk" -o /tmp/glibc-i18n.apk \
+ && apk add --allow-untrusted /tmp/glibc*.apk \
  && /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib \
  && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 
