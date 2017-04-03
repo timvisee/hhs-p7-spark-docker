@@ -94,8 +94,8 @@ RUN cd /tmp \
  && sudo mv spark/ /usr/lib/
 
 # Configure spark and it's memory limits
-RUN echo "spark.app.name hhs-p7-spark-docker" >> /usr/lib/spark/conf/spark-defaults.conf
- && echo "spark.driver.memory 200g" >> /usr/lib/spark/conf/spark-defaults.conf
+RUN echo "spark.app.name hhs-p7-spark-docker" >> /usr/lib/spark/conf/spark-defaults.conf \
+ && echo "spark.driver.memory 200g" >> /usr/lib/spark/conf/spark-defaults.conf \
  && "spark.driver.maxResultSize 0" >> /usr/lib/spark/conf/spark-defaults.conf
 
 ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
