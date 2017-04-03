@@ -34,6 +34,6 @@ fi
 
 # Start PySpark
 echo "Starting PySpark with Jupyter Notebook..."
-pyspark --conf spark.driver.maxResultSize=3g --driver-memory 3g
+pyspark --conf spark.driver.maxResultSize=100g --driver-memory 220g
 
 echo "Bootstrap finished."
