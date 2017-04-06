@@ -16,8 +16,7 @@ export PYSPARK_DRIVER_PYTHON_OPTS="
     --NotebookApp.open_browser=False
     --NotebookApp.ip='*'
     --NotebookApp.port=$NOTEBOOK_PORT
-    --notebook-dir=$NOTEBOOK_DIR
-    --allow-root"
+    --notebook-dir=$NOTEBOOK_DIR"
 
 # Set up the assignment files
 echo "Checking assignment files..."
