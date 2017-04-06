@@ -96,7 +96,7 @@ RUN cd /tmp \
 ENV PATH /opt/conda/bin:/usr/lib/spark/bin:${PATH}
 
 # Install Jupyter
-RUN $CONDA_DIR/bin/conda install --yes jupyter=4.3.0 notebook=4.2.3 \
+RUN $CONDA_DIR/bin/conda install --yes jupyter notebook=4.2.3 \
  && $CONDA_DIR/bin/conda clean -tipsy
 
 # Install additional libraries and packages
